@@ -4,9 +4,10 @@ public class trailing0efficient {
 
 		int count=0;
 		for(int i=5;i<=n;i=i*5){
-			count=count+count;
+			
 			//count=count+n/i;
-			count=n/i;
+			int temp = n/i;
+            count = count + temp;
 			
 	
 		}
