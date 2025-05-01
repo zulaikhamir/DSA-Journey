@@ -19,7 +19,7 @@ public class kstacks {
         top = new int[k];
         next = new int[n];
 
-        // Initialize all stacks as empty
+        // Initialize all stacks as empty//is an inbuilt function its cleaner than for loop
         Arrays.fill(top, -1);
 
         // Initialize all spaces as free and create free list
