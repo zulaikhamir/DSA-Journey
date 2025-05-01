@@ -1,5 +1,5 @@
 
-public class stockspan {
+public class stockspan {//naive solution
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 5, 7, 3, 5, 9, 6, 0, 7};
