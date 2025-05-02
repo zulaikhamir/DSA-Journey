@@ -3,7 +3,7 @@ public class operators{
 	public static void main(String[] args) {
 		int x=1;
 	int y=2;
-	int z=3;
+	//int z=3;
 	int r=-4;
 	int s=5;
 System.out.println("bitwise AND "+(x&y));
