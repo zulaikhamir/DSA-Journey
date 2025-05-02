@@ -13,7 +13,8 @@ public class powersiterative {
         int res = 1;
 
         while (n > 0) {
-            // If the current bit of n is set (i.e., n is odd)
+            // If the last bit of n is set (i.e., n is odd) In binary:
+
             if ((n & 1) == 1) {
                 res *= x;
             }
