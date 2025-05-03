@@ -26,7 +26,7 @@ public class moveall0s {
         int[] arr = {1, 2, 0, 4, 0, 5, 6, 0, 0, 7, 8};
         int n = arr.length;
 
-        int count = 0;
+        int count = 0;// 'count' keeps track of the index to place the next non-zero element
         for (int i = 0; i < n; i++) {
             if (arr[i] != 0) {
                 int temp = arr[i];
