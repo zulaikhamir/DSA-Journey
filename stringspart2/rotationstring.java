@@ -9,7 +9,7 @@ public class rotationstring {
             System.out.println("no rotaion ");
 
         } else {
-            if ((s1 + s1).indexOf(s2) >= 0) {
+            if ((s1 + s1).contains(s2)) {//indexOf
                 System.out.println("present");
             } else {
                 System.out.println("noooooo");
