@@ -1,5 +1,5 @@
 
-public class leftmostrepeatingchar {
+public class leftmostrepeatingchar {//NAIVE SOLUTION 
 
     public static void main(String[] args) {
         String str = "ab";
