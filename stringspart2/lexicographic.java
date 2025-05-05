@@ -14,40 +14,31 @@ public class lexicographic {
 
     // Function to calculate lexicographic rank
     static int findRank(String str) {
-        int rank = 1;
+        int rank = 1;//if 0 then add 1 to end 
         int n = str.length();
         int mul = fact(n);
 
-        // To count occurrences of characters
+        // Count of each character in ASCII order
         int[] count = new int[256];
-
-        // Count frequency of each character in the string
         for (int i = 0; i < n; i++) {
             count[str.charAt(i)]++;
         }
 
-        // Check for duplicate characters
-        for (int i = 0; i < 256; i++) {
-            if (count[i] > 1) {
-                System.out.println("Duplicate characters not allowed");
-                return -1;
-            }
-        }
-
-        // Compute cumulative count
+        // Cumulative count — so we can know how many characters are less than a given character
         for (int i = 1; i < 256; i++) {
             count[i] += count[i - 1];
         }
 
         for (int i = 0; i < n; i++) {
-            mul /= n - i;
+            mul /= (n - i); // Number of permutations for remaining characters
 
-            // Count of chars smaller than str.charAt(i)
+            // Number of characters smaller than str.charAt(i)
             int smaller = count[str.charAt(i) - 1];
 
+            // Add permutations that would appear before the current prefix
             rank += smaller * mul;
 
-            // Reduce count of characters greater than str.charAt(i)
+            // Reduce count of characters greater than or equal to str.charAt(i)
             for (int j = str.charAt(i); j < 256; j++) {
                 count[j]--;
             }
