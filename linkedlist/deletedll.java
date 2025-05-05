@@ -49,7 +49,7 @@ public class deletedll {
             cur = cur.next;
         }
 
-        cur.next = null;
+        cur.next = null;// Remove the last node by setting second last node's next to null
 
         return head;
 
