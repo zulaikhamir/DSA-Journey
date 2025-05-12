@@ -1,5 +1,6 @@
 
-public class MajorityElement {
+public class MajorityElement {//an element which appears more than n/2 times in an array
+//naive solution 
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 2, 3, 3, 3};
