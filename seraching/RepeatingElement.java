@@ -23,3 +23,4 @@ public class RepeatingElement {
         System.out.println("Repeating element is: " + slow);
     }
 }
+///do it for if array starts from 0 and not 1 (imp)
