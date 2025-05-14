@@ -48,6 +48,16 @@ public class CircularQueue {
         return arr[front];
     }
 
+    // ✅ Get rear element (last inserted)
+    public int getRear() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty!");
+            return -1;
+        }
+        // rear points to next insertion index, so last element is at (rear - 1 + capacity) % capacity
+        return arr[(rear - 1 + capacity) % capacity];
+    }
+
     // Check if empty (O(1))
     public boolean isEmpty() {
         return size == 0;
@@ -92,6 +102,12 @@ public class CircularQueue {
         q.enqueue(6); // wraps around
         q.display(); // 2 3 4 5 6
 
-        System.out.println("Front element: " + q.peek()); // 2
+        System.out.println("Front element: " + q.peek());     // 2
+        System.out.println("Rear element: " + q.getRear());   // 6
     }
 }
+// rear - 1: Gets the index of the last element added.
+
+// + capacity: Prevents negative index if rear = 0.
+
+// % capacity: Ensures circular wrap-around.
