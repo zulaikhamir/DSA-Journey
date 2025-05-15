@@ -8,7 +8,7 @@ public class ArrayDequeAsQueue {
         ArrayDeque<Integer> queue = new ArrayDeque<>();
 
         // Enqueue elements (inserting at rear)
-        queue.offer(10);
+        queue.offer(10);//they do not throw exceptions
         queue.offer(20);
         queue.offer(30);
 
