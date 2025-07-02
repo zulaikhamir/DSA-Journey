@@ -42,3 +42,9 @@ public class LongestEqualZeroOne {
         System.out.println("Length of longest subarray with equal number of 0s and 1s is: " + maxLength);
     }
 }
+// 📌 Idea:
+// The trick is to replace every 0 with -1 and then use the "longest subarray with sum zero" problem technique.
+
+// After replacing 0 → -1
+
+// Then, find the longest subarray whose sum is 0 using prefix sum + HashMap
