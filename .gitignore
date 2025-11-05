@@ -1,0 +1,23 @@
+# Java build artifacts
+*.class
+*.log
+hs_err_pid*
+replay_pid*
+
+# Build directories
+bin/
+out/
+target/
+build/
+
+# IDE files
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
