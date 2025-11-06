@@ -68,19 +68,3 @@ Notes:
   - Problems where correctness depends on careful edge-case reasoning or optimal asymptotics
 
 This rubric is applied by comparing solutions in the repo (not platform tags).
-
-## 🧹 Housekeeping
-
-- Compiled artifacts (`*.class`) are not tracked. Add to `.gitignore` if needed:
-
-```
-*.class
-```
-
-- Legacy day-based folders were removed in favor of topic-based organization.
-
-## ✅ Roadmap
-
-- Continue migrating any remaining items from `basic/` into `easy/|medium/|hard/`.
-- Add time/space complexity comments to each file header.
-- Add test inputs/outputs for quick verification.
