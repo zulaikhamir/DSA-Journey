@@ -8,6 +8,19 @@ Languages used: Java
 Currently focusing on: Arrays, Strings, and Dynamic Programming
 Goal: 200+ solved problems by mid-2026
 
+## 🗺️ Learning Path
+
+**New to DSA?** Check out [`LEARNING_PATH.md`](LEARNING_PATH.md) for a recommended order to tackle topics, building from foundations to advanced concepts.
+
+The path is organized in 6 phases:
+
+1. **Foundations** - Patterns, Math basics, Arrays basics
+2. **Core Data Structures** - Strings, Linked Lists, Stack, Queue, Deque
+3. **Core Algorithms** - Sorting, Searching, Recursion
+4. **Advanced Techniques** - Hashing, Bit Manipulation, Optimization
+5. **Specialized Topics** - Matrix, Advanced Math, Complex DS problems
+6. **Mastery** - Dynamic Programming, Cross-topic problems
+
 ## 📁 Repository structure
 
 All problems are organized by topic, then by difficulty. Filenames match public class names for easy running.
@@ -68,3 +81,5 @@ Notes:
   - Problems where correctness depends on careful edge-case reasoning or optimal asymptotics
 
 This rubric is applied by comparing solutions in the repo (not platform tags).
+
+add JUnit tests in your local/GitHub repository
