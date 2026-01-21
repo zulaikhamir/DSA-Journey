@@ -1,4 +1,4 @@
-//return index of second largest
+//return value of second largest
 
 public class SecondLargestInArray {
 
