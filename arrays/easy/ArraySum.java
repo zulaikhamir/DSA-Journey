@@ -1,3 +1,6 @@
+
+
+//sum of elements of array
 public class ArraySum {
     public static void main(String[] args) {
 
@@ -10,7 +13,7 @@ public class ArraySum {
     // arr[2] = 30;
     // arr[3] = 40;
     // arr[4] = 50;
-      
+
 	   int i=0;
   for(i=0;i<n;i++){
     sum=sum+arr[i];
