@@ -21,6 +21,7 @@ public class LeftRotateBy2 {
 
     }
 
+
     static void leftroattebyone(int[] arr, int n) {
         int temp = arr[0];
         for (int i = 1; i < n; i++) {

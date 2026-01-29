@@ -20,7 +20,7 @@ public class DistinctInPattern {//ditinct in pattern means chars in the pattern 
 
         // Outer loop to check every possible starting index in text
         for (int i = 0; i <= m - n;) {//no i++
-            //No i++ inside the for — and instead you're manually deciding how much to increment i based 
+            //No i++ inside the for — and instead you're manually deciding how much to increment i based
             //on how many characters matched before a mismatch happened.
             int j;
 

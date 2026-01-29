@@ -30,10 +30,11 @@ public class RemoveDuplicates {
         }
 
         // Copy unique elements back to the original array
-        for (int i = 0; i < n; i++) {
-            arr[i] = temp[i];
-            // Print the element
-            System.out.println(arr[i]);
-        }
+        // for (int i = 0; i < n; i++) {
+        //     arr[i] = temp[i];
+        //     // Print the element
+        //     System.out.println(arr[i]);
+        // }
+        //we dont need this this is bullshit
     }
 }
