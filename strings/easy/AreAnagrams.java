@@ -4,8 +4,11 @@ public class AreAnagrams{
 	public static void main(String[] args) {
 		String s1="abcdf";
 		String s2="acbfed";
-		if(s1.length()!=s2.length())
-		System.out.println("no anagram");
+		if(s1.length()!=s2.length()){
+			System.out.println("no anagram");
+			return;
+		}
+
 
 		char a[]=s1.toCharArray();
 		Arrays.sort(a);
