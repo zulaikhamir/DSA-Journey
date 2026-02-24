@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class HashMapExample {
 
+
     public static void main(String[] args) {
         // Create a new HashMap with Integer keys and String values
         HashMap<Integer, String> studentMap = new HashMap<>();

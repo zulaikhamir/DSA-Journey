@@ -22,7 +22,7 @@ public class LeftmostNonRepeatingCharBetter {
         }
 
         for (int i = 0; i < n; i++) {
-            if (count[str.charAt(i)] == 1);
+            if (count[str.charAt(i)] == 1)
             return i;
         }
 

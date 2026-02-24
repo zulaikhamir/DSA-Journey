@@ -32,7 +32,7 @@ class MyHash {
 
     // Insert key into hash table
     void insert(int key) {
-        int i = key % BUCKET;
+        int i = key % BUCKET;//hash function to determine the bucket index for the given key
         if (!table.get(i).contains(key)) {
             table.get(i).add(key);
             System.out.println("Inserted key " + key + " at bucket " + i);
