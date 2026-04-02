@@ -48,3 +48,39 @@ public class LongestEqualZeroOne {
 // After replacing 0 → -1
 
 // Then, find the longest subarray whose sum is 0 using prefix sum + HashMap
+
+
+class Solution {
+
+    public int findMaxLength(int[] nums) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        int balance = 0;
+        int maxLength = 0;
+
+        // important: balance 0 occurs before array starts
+        map.put(0, -1);
+
+        for (int i = 0; i < nums.length; i++) {
+
+            if (nums[i] == 1) {
+                balance += 1;
+            } else {
+                balance -= 1;
+            }
+
+            if (map.containsKey(balance)) {
+
+                int length = i - map.get(balance);
+                maxLength = Math.max(maxLength, length);
+
+            } else {
+
+                map.put(balance, i);
+            }
+        }
+
+        return maxLength;
+    }
+}
