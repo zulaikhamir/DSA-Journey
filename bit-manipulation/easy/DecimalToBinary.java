@@ -1,4 +1,4 @@
-public class BinaryToDecimal{
+public class DecimalToBinary {
 
 	static void fun(int n){
 		if(n<=0)
