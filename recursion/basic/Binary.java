@@ -9,6 +9,7 @@ class Solution {
 
         // recursive relation
         return toBinary(n/2) + (n%2);
+
     }
 }
 
