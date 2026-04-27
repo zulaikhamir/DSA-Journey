@@ -4,14 +4,13 @@ public class DeleteInDoublyLinkedList {
     public static void main(String[] args) {
 
         Node head = new Node(10);
-
         Node second = new Node(20);
-
         Node third = new Node(30);
+
         head.next = second;
         head.prev = null;
         second.next = third;
-        second.prev = null;
+        second.prev = head;
         third.prev = second;
         third.next = null;
 
@@ -27,8 +26,8 @@ public class DeleteInDoublyLinkedList {
 
     static Node deleteHead(Node head) {
         // If head is null, it means the list is empty.
-// If head.next is also null, it means the list has only one node.
-// After deleting, the list becomes completely empty (null).
+        // If head.next is also null, it means the list has only one node.
+       // After deleting, the list becomes completely empty (null).
 
         if (head == null || head.next == null) {
             return null;
