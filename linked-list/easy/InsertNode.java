@@ -72,6 +72,8 @@ public class InsertNode {
 
         Node cur = head;
         // Traverse the list to find the node just before the desired position
+
+
         for (int i = 1; i < position - 1 && cur != null; i++) {
             cur = cur.next;
         }

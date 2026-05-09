@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java DSA Cheat Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Unbounded:wght@400;700;900&display=swap');
+
+:root {
+  --bg: #06060a;
+  --surface: #0e0e14;
+  --card: #12121a;
+  --border: #1e1e2a;
+  --border-hover: #3a3a55;
+  --purple: #9d7fff;
+  --teal: #00e5c0;
+  --red: #ff5f5f;
+  --yellow: #ffc947;
+  --text: #ddddf0;
+  --muted: #666680;
+  --code-bg: #080810;
+  --mono: 'IBM Plex Mono', monospace;
+  --display: 'Unbounded', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  min-height: 100vh;
+}
+
+/* NAV */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(6,6,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  height: 52px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.top-nav::-webkit-scrollbar { display: none; }
+
+.nav-logo {
+  font-family: var(--display);
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--purple);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.nav-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.nav-btn:hover { border-color: var(--purple); color: var(--purple); }
+
+/* HERO */
+.hero {
+  padding: 80px 40px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 50%, rgba(157,127,255,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 70% 50%, rgba(0,229,192,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+.hero p {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.hero-tag {
+  font-size: 0.65rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* MAIN */
+.main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* SECTION */
+.section {
+  margin-bottom: 64px;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.section-id {
+  font-family: var(--display);
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+.section-progress {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+.section-progress .done { color: var(--teal); }
+
+/* GRID */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));
+  gap: 16px;
+}
+.cards.wide {
+  grid-template-columns: 1fr;
+}
+
+/* CARD */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--border-hover); }
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.card-head h3 {
+  font-family: var(--display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot.purple { background: var(--purple); }
+.dot.teal { background: var(--teal); }
+.dot.red { background: var(--red); }
+.dot.yellow { background: var(--yellow); }
+
+.card-body { padding: 16px; }
+
+/* CODE */
+.label {
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+.label:first-child { margin-top: 0; }
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.kw { color: #9d7fff; }
+.ty { color: #00e5c0; }
+.mt { color: #61b8ff; }
+.st { color: #82d9ff; }
+.cm { color: #3a3a55; font-style: italic; }
+.nm { color: #ffc947; }
+.op { color: #ff9f7f; }
+
+/* NOTE */
+.note {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.note.info {
+  background: rgba(157,127,255,0.07);
+  border-left: 2px solid var(--purple);
+}
+.note.warn {
+  background: rgba(255,95,95,0.07);
+  border-left: 2px solid var(--red);
+}
+.note.tip {
+  background: rgba(0,229,192,0.06);
+  border-left: 2px solid var(--teal);
+}
+
+/* PROBLEMS TABLE */
+.prob-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px;
+  margin-top: 4px;
+}
+.prob-item {
+  font-size: 0.65rem;
+  color: var(--muted);
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--code-bg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 48px 0;
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 48px 20px 40px; }
+  .main { padding: 0 12px 60px; }
+  pre { font-size: 0.65rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <span class="nav-logo">DSA.java</span>
+  <button class="nav-btn" onclick="document.getElementById('s1').scrollIntoView()">Arrays & Hashing</button>
+  <button class="nav-btn" onclick="document.getElementById('s2').scrollIntoView()">Two Pointers</button>
+  <button class="nav-btn" onclick="document.getElementById('s3').scrollIntoView()">Sliding Window</button>
+  <button class="nav-btn" onclick="document.getElementById('s4').scrollIntoView()">Stack</button>
+  <button class="nav-btn" onclick="document.getElementById('s5').scrollIntoView()">Binary Search</button>
+  <button class="nav-btn" onclick="document.getElementById('s6').scrollIntoView()">Linked List</button>
+  <button class="nav-btn" onclick="document.getElementById('s7').scrollIntoView()">Trees</button>
+  <button class="nav-btn" onclick="document.getElementById('s8').scrollIntoView()">Heap/PQ</button>
+  <button class="nav-btn" onclick="document.getElementById('s9').scrollIntoView()">Backtracking</button>
+  <button class="nav-btn" onclick="document.getElementById('s10').scrollIntoView()">Tries</button>
+  <button class="nav-btn" onclick="document.getElementById('s11').scrollIntoView()">Graphs</button>
+  <button class="nav-btn" onclick="document.getElementById('s12').scrollIntoView()">Adv Graphs</button>
+  <button class="nav-btn" onclick="document.getElementById('s13').scrollIntoView()">1D DP</button>
+  <button class="nav-btn" onclick="document.getElementById('s14').scrollIntoView()">2D DP</button>
+  <button class="nav-btn" onclick="document.getElementById('s15').scrollIntoView()">Greedy</button>
+  <button class="nav-btn" onclick="document.getElementById('s16').scrollIntoView()">Intervals</button>
+  <button class="nav-btn" onclick="document.getElementById('s17').scrollIntoView()">Math</button>
+  <button class="nav-btn" onclick="document.getElementById('s18').scrollIntoView()">Bit Manip</button>
+</nav>
+
+<div class="hero">
+  <h1>Java DSA<br>Cheat Sheet</h1>
+  <p>// syntax reference for every neetcode pattern</p>
+  <div class="hero-tags">
+    <span class="hero-tag">Java</span>
+    <span class="hero-tag">LeetCode</span>
+    <span class="hero-tag">NeetCode 150</span>
+    <span class="hero-tag">Interview Prep</span>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 1. ARRAYS & HASHING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <span class="section-id">01</span>
+    <span class="section-title">Arrays & Hashing</span>
+    <span class="section-progress"><span class="done">14</span> / 22</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>ARRAY BASICS</h3></div>
+      <div class="card-body">
+        <div class="label">Declaration & init</div>
+        <pre><span class="ty">int</span>[] arr = <span class="kw">new</span> <span class="ty">int</span>[<span class="nm">5</span>];
+<span class="ty">int</span>[] arr = {<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>};
+<span class="ty">int</span>[][] matrix = <span class="kw">new</span> <span class="ty">int</span>[<span class="nm">3</span>][<span class="nm">4</span>];
+
+arr.<span class="mt">length</span>              <span class="cm">// NOT .length()</span>
+matrix.<span class="mt">length</span>          <span class="cm">// rows</span>
+matrix[<span class="nm">0</span>].<span class="mt">length</span>       <span class="cm">// cols</span></pre>
+        <div class="label">Useful array methods</div>
+        <pre>Arrays.<span class="mt">sort</span>(arr);
+Arrays.<span class="mt">sort</span>(arr, <span class="nm">0</span>, <span class="nm">5</span>);        <span class="cm">// sort range</span>
+Arrays.<span class="mt">fill</span>(arr, <span class="nm">0</span>);
+Arrays.<span class="mt">copyOfRange</span>(arr, <span class="nm">0</span>, <span class="nm">3</span>);
+Arrays.<span class="mt">toString</span>(arr);          <span class="cm">// for printing</span>
+Arrays.<span class="mt">equals</span>(a, b);</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>HASHMAP</h3></div>
+      <div class="card-body">
+        <div class="label">Core operations</div>
+        <pre><span class="ty">Map</span>&lt;<span class="ty">Integer</span>, <span class="ty">Integer</span>&gt; map = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+map.<span class="mt">put</span>(key, val);
+map.<span class="mt">get</span>(key);                  <span class="cm">// null if absent</span>
+map.<span class="mt">getOrDefault</span>(key, <span class="nm">0</span>);
+map.<span class="mt">containsKey</span>(key);
+map.<span class="mt">containsValue</span>(val);
+map.<span class="mt">remove</span>(key);
+map.<span class="mt">size</span>();
+map.<span class="mt">isEmpty</span>();</pre>
+        <div class="label">Iteration patterns</div>
+        <pre><span class="cm">// iterate entries</span>
+<span class="kw">for</span> (<span class="ty">Map.Entry</span>&lt;<span class="ty">Integer</span>,<span class="ty">Integer</span>&gt; e : map.<span class="mt">entrySet</span>())
+    System.out.println(e.<span class="mt">getKey</span>() + <span class="st">" "</span> + e.<span class="mt">getValue</span>());
+
+<span class="cm">// frequency counter pattern</span>
+map.<span class="mt">put</span>(c, map.<span class="mt">getOrDefault</span>(c, <span class="nm">0</span>) + <span class="nm">1</span>);
+<span class="cm">// OR shorthand:</span>
+map.<span class="mt">merge</span>(c, <span class="nm">1</span>, Integer::sum);</pre>
+        <div class="note info">getOrDefault is your best friend. Use it instead of checking containsKey every time.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>HASHSET</h3></div>
+      <div class="card-body">
+        <div class="label">Core operations</div>
+        <pre><span class="ty">Set</span>&lt;<span class="ty">Integer</span>&gt; set = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;();
+set.<span class="mt">add</span>(x);
+set.<span class="mt">contains</span>(x);       <span class="cm">// O(1)</span>
+set.<span class="mt">remove</span>(x);
+set.<span class="mt">size</span>();
+
+<span class="cm">// build set from array</span>
+<span class="ty">Set</span>&lt;<span class="ty">Integer</span>&gt; set = <span class="kw">new</span> <span class="ty">HashSet</span>&lt;&gt;(Arrays.<span class="mt">asList</span>(arr));</pre>
+        <div class="note warn">⚠ int[] cannot be used directly with Arrays.asList. Use Integer[] or stream.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot yellow"></div><h3>ARRAYLIST & SORTING</h3></div>
+      <div class="card-body">
+        <div class="label">ArrayList basics</div>
+        <pre><span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; list = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+list.<span class="mt">add</span>(x);
+list.<span class="mt">get</span>(i);
+list.<span class="mt">set</span>(i, x);
+list.<span class="mt">remove</span>(<span class="ty">Integer</span>.<span class="mt">valueOf</span>(x)); <span class="cm">// by value</span>
+list.<span class="mt">remove</span>(i);               <span class="cm">// by index</span>
+list.<span class="mt">size</span>();
+Collections.<span class="mt">sort</span>(list);
+Collections.<span class="mt">sort</span>(list, (a,b) -> b-a); <span class="cm">// desc</span></pre>
+        <div class="label">Group Anagrams pattern</div>
+        <pre><span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">List</span>&lt;<span class="ty">String</span>&gt;&gt; map = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="ty">String</span> s : strs) {
+    <span class="ty">char</span>[] ch = s.<span class="mt">toCharArray</span>();
+    Arrays.<span class="mt">sort</span>(ch);
+    <span class="ty">String</span> key = <span class="kw">new</span> <span class="ty">String</span>(ch);
+    map.<span class="mt">computeIfAbsent</span>(key, k -> <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;()).<span class="mt">add</span>(s);
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 2. TWO POINTERS -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <span class="section-id">02</span>
+    <span class="section-title">Two Pointers</span>
+    <span class="section-progress"><span class="done">8</span> / 13</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>OPPOSITE ENDS</h3></div>
+      <div class="card-body">
+        <div class="label">Standard template</div>
+        <pre><span class="ty">int</span> left = <span class="nm">0</span>, right = arr.<span class="mt">length</span> - <span class="nm">1</span>;
+<span class="kw">while</span> (left &lt; right) {
+    <span class="kw">if</span> (arr[left] + arr[right] == target)
+        <span class="kw">return</span> <span class="kw">new</span> <span class="ty">int</span>[]{left, right};
+    <span class="kw">else if</span> (arr[left] + arr[right] &lt; target)
+        left++;
+    <span class="kw">else</span>
+        right--;
+}</pre>
+        <div class="label">3Sum pattern</div>
+        <pre>Arrays.<span class="mt">sort</span>(nums);
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; nums.<span class="mt">length</span> - <span class="nm">2</span>; i++) {
+    <span class="kw">if</span> (i &gt; <span class="nm">0</span> &amp;&amp; nums[i] == nums[i-<span class="nm">1</span>]) <span class="kw">continue</span>; <span class="cm">// skip dup</span>
+    <span class="ty">int</span> left = i+<span class="nm">1</span>, right = nums.<span class="mt">length</span>-<span class="nm">1</span>;
+    <span class="kw">while</span> (left &lt; right) {
+        <span class="ty">int</span> sum = nums[i] + nums[left] + nums[right];
+        <span class="kw">if</span> (sum == <span class="nm">0</span>) { <span class="cm">/* add, move both, skip dups */</span> }
+        <span class="kw">else if</span> (sum &lt; <span class="nm">0</span>) left++;
+        <span class="kw">else</span> right--;
+    }
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>FAST & SLOW / IN-PLACE</h3></div>
+      <div class="card-body">
+        <div class="label">Remove duplicates / elements (slow-fast)</div>
+        <pre><span class="ty">int</span> slow = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> fast = <span class="nm">0</span>; fast &lt; nums.<span class="mt">length</span>; fast++) {
+    <span class="kw">if</span> (nums[fast] != target) {
+        nums[slow++] = nums[fast];
+    }
+}
+<span class="kw">return</span> slow; <span class="cm">// new length</span></pre>
+        <div class="label">Reverse in-place</div>
+        <pre><span class="ty">char</span>[] ch = s.<span class="mt">toCharArray</span>();
+<span class="ty">int</span> l = <span class="nm">0</span>, r = ch.<span class="mt">length</span> - <span class="nm">1</span>;
+<span class="kw">while</span> (l &lt; r) {
+    <span class="ty">char</span> tmp = ch[l];
+    ch[l++] = ch[r];
+    ch[r--] = tmp;
+}
+<span class="kw">return</span> <span class="kw">new</span> <span class="ty">String</span>(ch);</pre>
+        <div class="note tip">Sort first when the array is unsorted and you need Two Pointers to work.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 3. SLIDING WINDOW -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <span class="section-id">03</span>
+    <span class="section-title">Sliding Window</span>
+    <span class="section-progress"><span class="done">4</span> / 8</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>FIXED SIZE WINDOW</h3></div>
+      <div class="card-body">
+        <div class="label">Template</div>
+        <pre><span class="ty">int</span> sum = <span class="nm">0</span>;
+<span class="cm">// build first window</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; k; i++) sum += arr[i];
+<span class="ty">int</span> max = sum;
+
+<span class="cm">// slide: add right, remove left</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = k; i &lt; n; i++) {
+    sum += arr[i] - arr[i - k];
+    max = Math.<span class="mt">max</span>(max, sum);
+}
+<span class="kw">return</span> max;</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>VARIABLE SIZE WINDOW</h3></div>
+      <div class="card-body">
+        <div class="label">Expand right, shrink left when invalid</div>
+        <pre><span class="ty">int</span> left = <span class="nm">0</span>, result = <span class="nm">0</span>;
+<span class="ty">Map</span>&lt;<span class="ty">Character</span>, <span class="ty">Integer</span>&gt; window = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+
+<span class="kw">for</span> (<span class="ty">int</span> right = <span class="nm">0</span>; right &lt; s.<span class="mt">length</span>(); right++) {
+    <span class="ty">char</span> c = s.<span class="mt">charAt</span>(right);
+    window.<span class="mt">merge</span>(c, <span class="nm">1</span>, Integer::sum);   <span class="cm">// add to window</span>
+
+    <span class="kw">while</span> (window.<span class="mt">get</span>(c) &gt; <span class="nm">1</span>) {         <span class="cm">// invalid?</span>
+        <span class="ty">char</span> lc = s.<span class="mt">charAt</span>(left++);
+        window.<span class="mt">merge</span>(lc, -<span class="nm">1</span>, Integer::sum);
+        <span class="kw">if</span> (window.<span class="mt">get</span>(lc) == <span class="nm">0</span>)
+            window.<span class="mt">remove</span>(lc);
+    }
+    result = Math.<span class="mt">max</span>(result, right - left + <span class="nm">1</span>);
+}
+<span class="kw">return</span> result;</pre>
+        <div class="note info">Window size = right - left + 1. Always.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot yellow"></div><h3>CHARACTER FREQUENCY WINDOW</h3></div>
+      <div class="card-body">
+        <div class="label">Using int[26] instead of HashMap (faster)</div>
+        <pre><span class="ty">int</span>[] freq = <span class="kw">new</span> <span class="ty">int</span>[<span class="nm">26</span>];
+<span class="kw">for</span> (<span class="ty">char</span> c : p.<span class="mt">toCharArray</span>()) freq[c - <span class="st">'a'</span>]++;
+
+<span class="ty">int</span>[] window = <span class="kw">new</span> <span class="ty">int</span>[<span class="nm">26</span>];
+<span class="ty">int</span> left = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> right = <span class="nm">0</span>; right &lt; s.<span class="mt">length</span>(); right++) {
+    window[s.<span class="mt">charAt</span>(right) - <span class="st">'a'</span>]++;
+    <span class="kw">if</span> (right - left + <span class="nm">1</span> &gt; p.<span class="mt">length</span>())
+        window[s.<span class="mt">charAt</span>(left++) - <span class="st">'a'</span>]--;
+    <span class="kw">if</span> (Arrays.<span class="mt">equals</span>(window, freq))
+        result.<span class="mt">add</span>(left);
+}</pre>
+        <div class="note tip">c - 'a' converts char to index 0-25. Use this for lowercase letter problems.</div>
+      </div>
+    </div>
+     <div class="card">
+      <p class="card-head"><div class="dot red"></div><h3>     Quick Links</h3></p>
+      <div class="card-body">
+        <p>Step 1 — Attempt cold (25 min timer, no AI, no hints)
+          Write anything. Even wrong code. Even pseudocode. The struggle is the point.</p>
+        <p>Step 2 — If stuck after 25 min, read only the approach, not the code
+          Think of it like being given the recipe method but not the measurements. You still have to cook it yourself.</p>
+        <p>Step 3 — Code it yourself from scratch
+          No copying. Even if you just read the solution, close it and write it from memory.</p>
+        <p>**Step 4 — Write a 2-line note to yourself***"This problem used sliding window because... The trick I missed was..."*
+
+          This note is your actual learning. Not the code</p>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 4. STACK -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <span class="section-id">04</span>
+    <span class="section-title">Stack</span>
+    <span class="section-progress"><span class="done">4</span> / 14</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>STACK OPERATIONS</h3></div>
+      <div class="card-body">
+        <div class="label">Use ArrayDeque — never java.util.Stack</div>
+        <pre><span class="ty">Deque</span>&lt;<span class="ty">Integer</span>&gt; stack = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+stack.<span class="mt">push</span>(x);      <span class="cm">// add to top</span>
+stack.<span class="mt">pop</span>();       <span class="cm">// remove & return top</span>
+stack.<span class="mt">peek</span>();      <span class="cm">// view top, no removal</span>
+stack.<span class="mt">isEmpty</span>();
+stack.<span class="mt">size</span>();</pre>
+        <div class="label">Valid Parentheses pattern</div>
+        <pre><span class="ty">Deque</span>&lt;<span class="ty">Character</span>&gt; stack = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="ty">char</span> c : s.<span class="mt">toCharArray</span>()) {
+    <span class="kw">if</span> (c == <span class="st">'('</span> || c == <span class="st">'{'</span> || c == <span class="st">'['</span>)
+        stack.<span class="mt">push</span>(c);
+    <span class="kw">else</span> {
+        <span class="kw">if</span> (stack.<span class="mt">isEmpty</span>()) <span class="kw">return false</span>;
+        <span class="ty">char</span> top = stack.<span class="mt">pop</span>();
+        <span class="kw">if</span> (c == <span class="st">')'</span> &amp;&amp; top != <span class="st">'('</span>) <span class="kw">return false</span>;
+        <span class="kw">if</span> (c == <span class="st">'}'</span> &amp;&amp; top != <span class="st">'{'</span>) <span class="kw">return false</span>;
+        <span class="kw">if</span> (c == <span class="st">']'</span> &amp;&amp; top != <span class="st">'['</span>) <span class="kw">return false</span>;
+    }
+}
+<span class="kw">return</span> stack.<span class="mt">isEmpty</span>();</pre>
+        <div class="note warn">⚠ java.util.Stack is legacy & slow. Always use ArrayDeque.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>MONOTONIC STACK</h3></div>
+      <div class="card-body">
+        <div class="label">Next Greater Element — store indices</div>
+        <pre><span class="ty">int</span>[] result = <span class="kw">new</span> <span class="ty">int</span>[n];
+Arrays.<span class="mt">fill</span>(result, -<span class="nm">1</span>);
+<span class="ty">Deque</span>&lt;<span class="ty">Integer</span>&gt; stack = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;(); <span class="cm">// indices</span>
+
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+    <span class="kw">while</span> (!stack.<span class="mt">isEmpty</span>() &amp;&amp; arr[stack.<span class="mt">peek</span>()] &lt; arr[i])
+        result[stack.<span class="mt">pop</span>()] = arr[i];
+    stack.<span class="mt">push</span>(i);
+}</pre>
+        <div class="label">Daily Temperatures pattern</div>
+        <pre><span class="ty">int</span>[] ans = <span class="kw">new</span> <span class="ty">int</span>[n];
+<span class="ty">Deque</span>&lt;<span class="ty">Integer</span>&gt; stack = <span class="kw">new</span> <span class="ty">ArrayDeque</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+    <span class="kw">while</span> (!stack.<span class="mt">isEmpty</span>() &amp;&amp; temp[stack.<span class="mt">peek</span>()] &lt; temp[i]) {
+        <span class="ty">int</span> idx = stack.<span class="mt">pop</span>();
+        ans[idx] = i - idx;
+    }
+    stack.<span class="mt">push</span>(i);
+}</pre>
+        <div class="note info">Push indices not values. You need the index to compute distance or store results.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 5. BINARY SEARCH -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <span class="section-id">05</span>
+    <span class="section-title">Binary Search</span>
+    <span class="section-progress"><span class="done">4</span> / 14</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>CLASSIC BINARY SEARCH</h3></div>
+      <div class="card-body">
+        <div class="label">Exact target</div>
+        <pre><span class="ty">int</span> left = <span class="nm">0</span>, right = arr.<span class="mt">length</span> - <span class="nm">1</span>;
+<span class="kw">while</span> (left &lt;= right) {
+    <span class="ty">int</span> mid = left + (right - left) / <span class="nm">2</span>; <span class="cm">// overflow-safe!</span>
+    <span class="kw">if</span> (arr[mid] == target) <span class="kw">return</span> mid;
+    <span class="kw">else if</span> (arr[mid] &lt; target) left = mid + <span class="nm">1</span>;
+    <span class="kw">else</span> right = mid - <span class="nm">1</span>;
+}
+<span class="kw">return</span> -<span class="nm">1</span>;</pre>
+        <div class="note warn">⚠ Never use (left + right) / 2 — it overflows for large indices. Always use left + (right - left) / 2.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>BOUNDARY BINARY SEARCH</h3></div>
+      <div class="card-body">
+        <div class="label">Find leftmost valid (left < right)</div>
+        <pre><span class="ty">int</span> left = lo, right = hi;
+<span class="kw">while</span> (left &lt; right) {
+    <span class="ty">int</span> mid = left + (right - left) / <span class="nm">2</span>;
+    <span class="kw">if</span> (feasible(mid)) right = mid;
+    <span class="kw">else</span> left = mid + <span class="nm">1</span>;
+}
+<span class="kw">return</span> left;</pre>
+        <div class="label">Search in rotated array</div>
+        <pre><span class="kw">while</span> (left &lt;= right) {
+    <span class="ty">int</span> mid = left + (right - left) / <span class="nm">2</span>;
+    <span class="kw">if</span> (nums[mid] == target) <span class="kw">return</span> mid;
+
+    <span class="cm">// left half is sorted</span>
+    <span class="kw">if</span> (nums[left] &lt;= nums[mid]) {
+        <span class="kw">if</span> (nums[left] &lt;= target &amp;&amp; target &lt; nums[mid])
+            right = mid - <span class="nm">1</span>;
+        <span class="kw">else</span> left = mid + <span class="nm">1</span>;
+    } <span class="kw">else</span> { <span class="cm">// right half is sorted</span>
+        <span class="kw">if</span> (nums[mid] &lt; target &amp;&amp; target &lt;= nums[right])
+            left = mid + <span class="nm">1</span>;
+        <span class="kw">else</span> right = mid - <span class="nm">1</span>;
+    }
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 6. LINKED LIST -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <span class="section-id">06</span>
+    <span class="section-title">Linked List</span>
+    <span class="section-progress"><span class="done">3</span> / 14</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>NODE & CORE PATTERNS</h3></div>
+      <div class="card-body">
+        <div class="label">ListNode (given in every problem)</div>
+        <pre><span class="kw">class</span> <span class="ty">ListNode</span> {
+    <span class="ty">int</span> val;
+    <span class="ty">ListNode</span> next;
+    <span class="ty">ListNode</span>(<span class="ty">int</span> val) { <span class="kw">this</span>.val = val; }
+}</pre>
+        <div class="label">Reverse linked list</div>
+        <pre><span class="ty">ListNode</span> prev = <span class="kw">null</span>, curr = head;
+<span class="kw">while</span> (curr != <span class="kw">null</span>) {
+    <span class="ty">ListNode</span> next = curr.next; <span class="cm">// save next</span>
+    curr.next = prev;           <span class="cm">// reverse</span>
+    prev = curr;                <span class="cm">// move prev</span>
+    curr = next;                <span class="cm">// move curr</span>
+}
+<span class="kw">return</span> prev;                   <span class="cm">// new head</span></pre>
+        <div class="label">Dummy node (use when head might change)</div>
+        <pre><span class="ty">ListNode</span> dummy = <span class="kw">new</span> <span class="ty">ListNode</span>(<span class="nm">0</span>);
+dummy.next = head;
+<span class="ty">ListNode</span> curr = dummy;
+<span class="cm">// ... manipulate list ...</span>
+<span class="kw">return</span> dummy.next;</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>FAST & SLOW POINTERS</h3></div>
+      <div class="card-body">
+        <div class="label">Detect cycle</div>
+        <pre><span class="ty">ListNode</span> slow = head, fast = head;
+<span class="kw">while</span> (fast != <span class="kw">null</span> &amp;&amp; fast.next != <span class="kw">null</span>) {
+    slow = slow.next;
+    fast = fast.next.next;
+    <span class="kw">if</span> (slow == fast) <span class="kw">return true</span>;
+}
+<span class="kw">return false</span>;</pre>
+        <div class="label">Find middle node</div>
+        <pre><span class="ty">ListNode</span> slow = head, fast = head;
+<span class="kw">while</span> (fast != <span class="kw">null</span> &amp;&amp; fast.next != <span class="kw">null</span>) {
+    slow = slow.next;
+    fast = fast.next.next;
+}
+<span class="kw">return</span> slow; <span class="cm">// middle</span></pre>
+        <div class="label">Remove Nth from end</div>
+        <pre><span class="ty">ListNode</span> dummy = <span class="kw">new</span> <span class="ty">ListNode</span>(<span class="nm">0</span>);
+dummy.next = head;
+<span class="ty">ListNode</span> fast = dummy, slow = dummy;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt;= n; i++) fast = fast.next;
+<span class="kw">while</span> (fast != <span class="kw">null</span>) { slow = slow.next; fast = fast.next; }
+slow.next = slow.next.next;
+<span class="kw">return</span> dummy.next;</pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 7. TREES -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s7">
+  <div class="section-header">
+    <span class="section-id">07</span>
+    <span class="section-title">Trees</span>
+    <span class="section-progress"><span class="done">9</span> / 23</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>DFS TRAVERSALS</h3></div>
+      <div class="card-body">
+        <div class="label">TreeNode definition</div>
+        <pre><span class="kw">class</span> <span class="ty">TreeNode</span> {
+    <span class="ty">int</span> val; <span class="ty">TreeNode</span> left, right;
+    <span class="ty">TreeNode</span>(<span class="ty">int</span> val) { <span class="kw">this</span>.val = val; }
+}</pre>
+        <div class="label">All three orders</div>
+        <pre><span class="cm">// Preorder:  root → left → right</span>
+<span class="cm">// Inorder:   left → root → right  (BST = sorted!)</span>
+<span class="cm">// Postorder: left → right → root</span>
+
+<span class="kw">void</span> <span class="mt">dfs</span>(<span class="ty">TreeNode</span> node) {
+    <span class="kw">if</span> (node == <span class="kw">null</span>) <span class="kw">return</span>;  <span class="cm">// base case FIRST</span>
+    <span class="cm">// preorder: process(node.val)</span>
+    <span class="mt">dfs</span>(node.left);
+    <span class="cm">// inorder: process(node.val)</span>
+    <span class="mt">dfs</span>(node.right);
+    <span class="cm">// postorder: process(node.val)</span>
+}</pre>
+        <div class="label">Max depth pattern</div>
+        <pre><span class="ty">int</span> <span class="mt">maxDepth</span>(<span class="ty">TreeNode</span> root) {
+    <span class="kw">if</span> (root == <span class="kw">null</span>) <span class="kw">return</span> <span class="nm">0</span>;
+    <span class="kw">return</span> <span class="nm">1</span> + Math.<span class="mt">max</span>(<span class="mt">maxDepth</span>(root.left),
+                         <span class="mt">maxDepth</span>(root.right));
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>BFS — LEVEL ORDER</h3></div>
+      <div class="card-body">
+        <div class="label">Template (use Queue, not Deque)</div>
+        <pre><span class="ty">Queue</span>&lt;<span class="ty">TreeNode</span>&gt; q = <span class="kw">new</span> <span class="ty">LinkedList</span>&lt;&gt;();
+<span class="kw">if</span> (root != <span class="kw">null</span>) q.<span class="mt">offer</span>(root);
+<span class="ty">List</span>&lt;<span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt;&gt; result = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+
+<span class="kw">while</span> (!q.<span class="mt">isEmpty</span>()) {
+    <span class="ty">int</span> size = q.<span class="mt">size</span>();          <span class="cm">// snapshot level size</span>
+    <span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; level = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; size; i++) {
+        <span class="ty">TreeNode</span> node = q.<span class="mt">poll</span>();
+        level.<span class="mt">add</span>(node.val);
+        <span class="kw">if</span> (node.left != <span class="kw">null</span>) q.<span class="mt">offer</span>(node.left);
+        <span class="kw">if</span> (node.right != <span class="kw">null</span>) q.<span class="mt">offer</span>(node.right);
+    }
+    result.<span class="mt">add</span>(level);
+}</pre>
+        <div class="note info">BFS right side view: just take the last element of each level.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot yellow"></div><h3>BST OPERATIONS</h3></div>
+      <div class="card-body">
+        <div class="label">BST property: inorder = sorted ascending</div>
+        <pre><span class="cm">// Validate BST</span>
+<span class="ty">boolean</span> <span class="mt">valid</span>(<span class="ty">TreeNode</span> node, <span class="ty">long</span> min, <span class="ty">long</span> max) {
+    <span class="kw">if</span> (node == <span class="kw">null</span>) <span class="kw">return true</span>;
+    <span class="kw">if</span> (node.val &lt;= min || node.val &gt;= max) <span class="kw">return false</span>;
+    <span class="kw">return</span> <span class="mt">valid</span>(node.left, min, node.val)
+        &amp;&amp; <span class="mt">valid</span>(node.right, node.val, max);
+}
+<span class="cm">// call: valid(root, Long.MIN_VALUE, Long.MAX_VALUE)</span></pre>
+        <div class="label">BST search</div>
+        <pre><span class="ty">TreeNode</span> <span class="mt">search</span>(<span class="ty">TreeNode</span> root, <span class="ty">int</span> target) {
+    <span class="kw">if</span> (root == <span class="kw">null</span> || root.val == target) <span class="kw">return</span> root;
+    <span class="kw">if</span> (target &lt; root.val) <span class="kw">return</span> <span class="mt">search</span>(root.left, target);
+    <span class="kw">return</span> <span class="mt">search</span>(root.right, target);
+}</pre>
+        <div class="note warn">⚠ Use Long.MIN_VALUE / Long.MAX_VALUE for BST bounds to handle Integer edge cases.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 8. HEAP / PRIORITY QUEUE -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s8">
+  <div class="section-header">
+    <span class="section-id">08</span>
+    <span class="section-title">Heap / Priority Queue</span>
+    <span class="section-progress"><span class="done">2</span> / 12</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>MIN & MAX HEAP</h3></div>
+      <div class="card-body">
+        <div class="label">Min-heap (default Java behavior)</div>
+        <pre><span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; minH = <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;();
+minH.<span class="mt">offer</span>(x);    <span class="cm">// add</span>
+minH.<span class="mt">poll</span>();      <span class="cm">// remove & return smallest</span>
+minH.<span class="mt">peek</span>();      <span class="cm">// view smallest, no removal</span>
+minH.<span class="mt">size</span>();
+minH.<span class="mt">isEmpty</span>();</pre>
+        <div class="label">Max-heap</div>
+        <pre><span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; maxH =
+    <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;(Collections.<span class="mt">reverseOrder</span>());
+<span class="cm">// OR:</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; maxH =
+    <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;((a, b) -> b - a);</pre>
+        <div class="label">Custom comparator (pair/array)</div>
+        <pre><span class="cm">// min-heap by second element</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">int</span>[]&gt; pq =
+    <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;((a, b) -> a[<span class="nm">1</span>] - b[<span class="nm">1</span>]);
+pq.<span class="mt">offer</span>(<span class="kw">new</span> <span class="ty">int</span>[]{val, freq});</pre>
+        <div class="note info">Use heap for: Top K, K closest, merge K sorted, median tracking.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>TOP K PATTERN</h3></div>
+      <div class="card-body">
+        <div class="label">K most frequent elements</div>
+        <pre><span class="cm">// 1. count frequencies</span>
+<span class="ty">Map</span>&lt;<span class="ty">Integer</span>,<span class="ty">Integer</span>&gt; freq = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="ty">int</span> n : nums) freq.<span class="mt">merge</span>(n, <span class="nm">1</span>, Integer::sum);
+
+<span class="cm">// 2. min-heap of size k (evict smallest)</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; pq =
+    <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;((a,b) -> freq.<span class="mt">get</span>(a) - freq.<span class="mt">get</span>(b));
+
+<span class="kw">for</span> (<span class="ty">int</span> key : freq.<span class="mt">keySet</span>()) {
+    pq.<span class="mt">offer</span>(key);
+    <span class="kw">if</span> (pq.<span class="mt">size</span>() &gt; k) pq.<span class="mt">poll</span>();
+}
+<span class="cm">// pq now has top k elements</span></pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 9. BACKTRACKING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s9">
+  <div class="section-header">
+    <span class="section-id">09</span>
+    <span class="section-title">Backtracking</span>
+    <span class="section-progress"><span class="done">2</span> / 17</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>UNIVERSAL TEMPLATE</h3></div>
+      <div class="card-body">
+        <div class="label">Choose → Explore → Undo</div>
+        <pre><span class="ty">List</span>&lt;<span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt;&gt; result = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+
+<span class="kw">void</span> <span class="mt">backtrack</span>(<span class="ty">int</span> start, <span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; curr) {
+    result.<span class="mt">add</span>(<span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(curr)); <span class="cm">// snapshot!</span>
+
+    <span class="kw">for</span> (<span class="ty">int</span> i = start; i &lt; nums.<span class="mt">length</span>; i++) {
+        curr.<span class="mt">add</span>(nums[i]);               <span class="cm">// choose</span>
+        <span class="mt">backtrack</span>(i + <span class="nm">1</span>, curr);         <span class="cm">// explore</span>
+        curr.<span class="mt">remove</span>(curr.<span class="mt">size</span>()-<span class="nm">1</span>);    <span class="cm">// undo</span>
+    }
+}</pre>
+        <div class="label">With duplicates (sort + skip)</div>
+        <pre>Arrays.<span class="mt">sort</span>(nums); <span class="cm">// must sort first</span>
+
+<span class="kw">for</span> (<span class="ty">int</span> i = start; i &lt; nums.<span class="mt">length</span>; i++) {
+    <span class="kw">if</span> (i &gt; start &amp;&amp; nums[i] == nums[i-<span class="nm">1</span>]) <span class="kw">continue</span>; <span class="cm">// skip dup</span>
+    curr.<span class="mt">add</span>(nums[i]);
+    <span class="mt">backtrack</span>(i + <span class="nm">1</span>, curr);
+    curr.<span class="mt">remove</span>(curr.<span class="mt">size</span>()-<span class="nm">1</span>);
+}</pre>
+        <div class="note warn">⚠ new ArrayList&lt;&gt;(curr) — without this you store a reference. The list will be empty at the end.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot yellow"></div><h3>COMMON VARIANTS</h3></div>
+      <div class="card-body">
+        <div class="label">Combination Sum (reuse elements)</div>
+        <pre><span class="kw">void</span> <span class="mt">backtrack</span>(<span class="ty">int</span> start, <span class="ty">int</span> remain, <span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; curr) {
+    <span class="kw">if</span> (remain == <span class="nm">0</span>) { result.<span class="mt">add</span>(<span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(curr)); <span class="kw">return</span>; }
+    <span class="kw">if</span> (remain &lt; <span class="nm">0</span>) <span class="kw">return</span>;
+    <span class="kw">for</span> (<span class="ty">int</span> i = start; i &lt; candidates.<span class="mt">length</span>; i++) {
+        curr.<span class="mt">add</span>(candidates[i]);
+        <span class="mt">backtrack</span>(i, remain - candidates[i], curr); <span class="cm">// i not i+1</span>
+        curr.<span class="mt">remove</span>(curr.<span class="mt">size</span>()-<span class="nm">1</span>);
+    }
+}</pre>
+        <div class="label">Permutations (use boolean[] visited)</div>
+        <pre><span class="ty">boolean</span>[] used = <span class="kw">new</span> <span class="ty">boolean</span>[nums.<span class="mt">length</span>];
+<span class="kw">void</span> <span class="mt">backtrack</span>(<span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt; curr) {
+    <span class="kw">if</span> (curr.<span class="mt">size</span>() == nums.<span class="mt">length</span>) { result.<span class="mt">add</span>(<span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;(curr)); <span class="kw">return</span>; }
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; nums.<span class="mt">length</span>; i++) {
+        <span class="kw">if</span> (used[i]) <span class="kw">continue</span>;
+        used[i] = <span class="kw">true</span>;
+        curr.<span class="mt">add</span>(nums[i]);
+        <span class="mt">backtrack</span>(curr);
+        curr.<span class="mt">remove</span>(curr.<span class="mt">size</span>()-<span class="nm">1</span>);
+        used[i] = <span class="kw">false</span>;
+    }
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 10. TRIES -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s10">
+  <div class="section-header">
+    <span class="section-id">10</span>
+    <span class="section-title">Tries</span>
+    <span class="section-progress"><span class="done">1</span> / 4</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>TRIE IMPLEMENTATION</h3></div>
+      <div class="card-body">
+        <div class="label">TrieNode + Trie class</div>
+        <pre><span class="kw">class</span> <span class="ty">TrieNode</span> {
+    <span class="ty">TrieNode</span>[] children = <span class="kw">new</span> <span class="ty">TrieNode</span>[<span class="nm">26</span>];
+    <span class="ty">boolean</span> isEnd = <span class="kw">false</span>;
+}
+
+<span class="kw">class</span> <span class="ty">Trie</span> {
+    <span class="ty">TrieNode</span> root = <span class="kw">new</span> <span class="ty">TrieNode</span>();
+
+    <span class="kw">void</span> <span class="mt">insert</span>(<span class="ty">String</span> word) {
+        <span class="ty">TrieNode</span> node = root;
+        <span class="kw">for</span> (<span class="ty">char</span> c : word.<span class="mt">toCharArray</span>()) {
+            <span class="ty">int</span> i = c - <span class="st">'a'</span>;
+            <span class="kw">if</span> (node.children[i] == <span class="kw">null</span>)
+                node.children[i] = <span class="kw">new</span> <span class="ty">TrieNode</span>();
+            node = node.children[i];
+        }
+        node.isEnd = <span class="kw">true</span>;
+    }
+
+    <span class="ty">boolean</span> <span class="mt">search</span>(<span class="ty">String</span> word) {
+        <span class="ty">TrieNode</span> node = root;
+        <span class="kw">for</span> (<span class="ty">char</span> c : word.<span class="mt">toCharArray</span>()) {
+            <span class="ty">int</span> i = c - <span class="st">'a'</span>;
+            <span class="kw">if</span> (node.children[i] == <span class="kw">null</span>) <span class="kw">return false</span>;
+            node = node.children[i];
+        }
+        <span class="kw">return</span> node.isEnd;
+    }
+
+    <span class="ty">boolean</span> <span class="mt">startsWith</span>(<span class="ty">String</span> prefix) {
+        <span class="ty">TrieNode</span> node = root;
+        <span class="kw">for</span> (<span class="ty">char</span> c : prefix.<span class="mt">toCharArray</span>()) {
+            <span class="ty">int</span> i = c - <span class="st">'a'</span>;
+            <span class="kw">if</span> (node.children[i] == <span class="kw">null</span>) <span class="kw">return false</span>;
+            node = node.children[i];
+        }
+        <span class="kw">return true</span>;
+    }
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 11. GRAPHS -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s11">
+  <div class="section-header">
+    <span class="section-id">11</span>
+    <span class="section-title">Graphs</span>
+    <span class="section-progress"><span class="done">8</span> / 21</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>GRAPH SETUP</h3></div>
+      <div class="card-body">
+        <div class="label">Adjacency list from edge list</div>
+        <pre><span class="ty">Map</span>&lt;<span class="ty">Integer</span>, <span class="ty">List</span>&lt;<span class="ty">Integer</span>&gt;&gt; graph = <span class="kw">new</span> <span class="ty">HashMap</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="ty">int</span>[] edge : edges) {
+    graph.<span class="mt">computeIfAbsent</span>(edge[<span class="nm">0</span>], k -> <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;()).<span class="mt">add</span>(edge[<span class="nm">1</span>]);
+    graph.<span class="mt">computeIfAbsent</span>(edge[<span class="nm">1</span>], k -> <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;()).<span class="mt">add</span>(edge[<span class="nm">0</span>]); <span class="cm">// undirected</span>
+}</pre>
+        <div class="label">Grid as graph (4-directional)</div>
+        <pre><span class="ty">int</span>[][] dirs = {{<span class="nm">0</span>,<span class="nm">1</span>},{<span class="nm">0</span>,-<span class="nm">1</span>},{<span class="nm">1</span>,<span class="nm">0</span>},{-<span class="nm">1</span>,<span class="nm">0</span>}};
+<span class="kw">for</span> (<span class="ty">int</span>[] d : dirs) {
+    <span class="ty">int</span> nr = row + d[<span class="nm">0</span>], nc = col + d[<span class="nm">1</span>];
+    <span class="kw">if</span> (nr &gt;= <span class="nm">0</span> &amp;&amp; nr &lt; rows &amp;&amp; nc &gt;= <span class="nm">0</span> &amp;&amp; nc &lt; cols)
+        <span class="cm">// valid neighbor</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>DFS & BFS ON GRAPHS</h3></div>
+      <div class="card-body">
+        <div class="label">DFS (recursive) — Number of Islands</div>
+        <pre><span class="ty">boolean</span>[][] visited = <span class="kw">new</span> <span class="ty">boolean</span>[rows][cols];
+
+<span class="kw">void</span> <span class="mt">dfs</span>(<span class="ty">char</span>[][] grid, <span class="ty">int</span> r, <span class="ty">int</span> c) {
+    <span class="kw">if</span> (r&lt;<span class="nm">0</span>||r&gt;=rows||c&lt;<span class="nm">0</span>||c&gt;=cols||visited[r][c]||grid[r][c]==<span class="st">'0'</span>)
+        <span class="kw">return</span>;
+    visited[r][c] = <span class="kw">true</span>;
+    <span class="mt">dfs</span>(grid, r+<span class="nm">1</span>, c); <span class="mt">dfs</span>(grid, r-<span class="nm">1</span>, c);
+    <span class="mt">dfs</span>(grid, r, c+<span class="nm">1</span>); <span class="mt">dfs</span>(grid, r, c-<span class="nm">1</span>);
+}</pre>
+        <div class="label">BFS — Rotting Oranges / Shortest path</div>
+        <pre><span class="ty">Queue</span>&lt;<span class="ty">int</span>[]&gt; q = <span class="kw">new</span> <span class="ty">LinkedList</span>&lt;&gt;();
+<span class="ty">boolean</span>[][] visited = <span class="kw">new</span> <span class="ty">boolean</span>[rows][cols];
+
+q.<span class="mt">offer</span>(<span class="kw">new</span> <span class="ty">int</span>[]{startR, startC});
+visited[startR][startC] = <span class="kw">true</span>;
+<span class="ty">int</span> steps = <span class="nm">0</span>;
+
+<span class="kw">while</span> (!q.<span class="mt">isEmpty</span>()) {
+    <span class="ty">int</span> size = q.<span class="mt">size</span>();
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; size; i++) {
+        <span class="ty">int</span>[] cell = q.<span class="mt">poll</span>();
+        <span class="kw">for</span> (<span class="ty">int</span>[] d : dirs) {
+            <span class="ty">int</span> nr = cell[<span class="nm">0</span>]+d[<span class="nm">0</span>], nc = cell[<span class="nm">1</span>]+d[<span class="nm">1</span>];
+            <span class="kw">if</span> (valid(nr,nc) &amp;&amp; !visited[nr][nc]) {
+                visited[nr][nc] = <span class="kw">true</span>;
+                q.<span class="mt">offer</span>(<span class="kw">new</span> <span class="ty">int</span>[]{nr, nc});
+            }
+        }
+    }
+    steps++;
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot yellow"></div><h3>UNION-FIND (DISJOINT SET)</h3></div>
+      <div class="card-body">
+        <div class="label">Template (path compression + union by rank)</div>
+        <pre><span class="ty">int</span>[] parent, rank;
+
+<span class="kw">void</span> <span class="mt">init</span>(<span class="ty">int</span> n) {
+    parent = <span class="kw">new</span> <span class="ty">int</span>[n];
+    rank = <span class="kw">new</span> <span class="ty">int</span>[n];
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) parent[i] = i;
+}
+
+<span class="ty">int</span> <span class="mt">find</span>(<span class="ty">int</span> x) {
+    <span class="kw">if</span> (parent[x] != x)
+        parent[x] = <span class="mt">find</span>(parent[x]); <span class="cm">// path compress</span>
+    <span class="kw">return</span> parent[x];
+}
+
+<span class="ty">boolean</span> <span class="mt">union</span>(<span class="ty">int</span> a, <span class="ty">int</span> b) {
+    <span class="ty">int</span> ra = <span class="mt">find</span>(a), rb = <span class="mt">find</span>(b);
+    <span class="kw">if</span> (ra == rb) <span class="kw">return false</span>; <span class="cm">// already connected</span>
+    <span class="kw">if</span> (rank[ra] &lt; rank[rb]) parent[ra] = rb;
+    <span class="kw">else if</span> (rank[ra] &gt; rank[rb]) parent[rb] = ra;
+    <span class="kw">else</span> { parent[rb] = ra; rank[ra]++; }
+    <span class="kw">return true</span>;
+}</pre>
+        <div class="note tip">Union returns false = cycle detected. Use for: connected components, redundant connection.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>TOPOLOGICAL SORT (CYCLE DETECT)</h3></div>
+      <div class="card-body">
+        <div class="label">Course Schedule — BFS (Kahn's algorithm)</div>
+        <pre><span class="ty">int</span>[] inDegree = <span class="kw">new</span> <span class="ty">int</span>[n];
+<span class="kw">for</span> (<span class="ty">int</span>[] pre : prerequisites)
+    inDegree[pre[<span class="nm">0</span>]]++;
+
+<span class="ty">Queue</span>&lt;<span class="ty">Integer</span>&gt; q = <span class="kw">new</span> <span class="ty">LinkedList</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++)
+    <span class="kw">if</span> (inDegree[i] == <span class="nm">0</span>) q.<span class="mt">offer</span>(i);
+
+<span class="ty">int</span> count = <span class="nm">0</span>;
+<span class="kw">while</span> (!q.<span class="mt">isEmpty</span>()) {
+    <span class="ty">int</span> node = q.<span class="mt">poll</span>(); count++;
+    <span class="kw">for</span> (<span class="ty">int</span> next : graph.<span class="mt">get</span>(node)) {
+        <span class="kw">if</span> (--inDegree[next] == <span class="nm">0</span>) q.<span class="mt">offer</span>(next);
+    }
+}
+<span class="kw">return</span> count == n; <span class="cm">// true = no cycle</span></pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 12. ADVANCED GRAPHS -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s12">
+  <div class="section-header">
+    <span class="section-id">12</span>
+    <span class="section-title">Advanced Graphs</span>
+    <span class="section-progress"><span class="done">0</span> / 10</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>DIJKSTRA (SHORTEST PATH)</h3></div>
+      <div class="card-body">
+        <div class="label">Weighted graph — min-heap by distance</div>
+        <pre><span class="ty">int</span>[] dist = <span class="kw">new</span> <span class="ty">int</span>[n];
+Arrays.<span class="mt">fill</span>(dist, Integer.MAX_VALUE);
+dist[src] = <span class="nm">0</span>;
+
+<span class="cm">// {distance, node}</span>
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">int</span>[]&gt; pq =
+    <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;((a,b) -> a[<span class="nm">0</span>] - b[<span class="nm">0</span>]);
+pq.<span class="mt">offer</span>(<span class="kw">new</span> <span class="ty">int</span>[]{<span class="nm">0</span>, src});
+
+<span class="kw">while</span> (!pq.<span class="mt">isEmpty</span>()) {
+    <span class="ty">int</span>[] curr = pq.<span class="mt">poll</span>();
+    <span class="ty">int</span> d = curr[<span class="nm">0</span>], node = curr[<span class="nm">1</span>];
+    <span class="kw">if</span> (d &gt; dist[node]) <span class="kw">continue</span>; <span class="cm">// stale entry</span>
+
+    <span class="kw">for</span> (<span class="ty">int</span>[] neighbor : graph.<span class="mt">get</span>(node)) {
+        <span class="ty">int</span> next = neighbor[<span class="nm">0</span>], w = neighbor[<span class="nm">1</span>];
+        <span class="kw">if</span> (dist[node] + w &lt; dist[next]) {
+            dist[next] = dist[node] + w;
+            pq.<span class="mt">offer</span>(<span class="kw">new</span> <span class="ty">int</span>[]{dist[next], next});
+        }
+    }
+}</pre>
+        <div class="note info">if (d > dist[node]) continue — this line is critical. Skips stale entries from heap.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 13. 1D DYNAMIC PROGRAMMING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s13">
+  <div class="section-header">
+    <span class="section-id">13</span>
+    <span class="section-title">1D Dynamic Programming</span>
+    <span class="section-progress"><span class="done">3</span> / 17</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>CORE 1D DP PATTERNS</h3></div>
+      <div class="card-body">
+        <div class="label">Climbing Stairs / Fibonacci-style</div>
+        <pre><span class="ty">int</span>[] dp = <span class="kw">new</span> <span class="ty">int</span>[n+<span class="nm">1</span>];
+dp[<span class="nm">0</span>] = <span class="nm">1</span>; dp[<span class="nm">1</span>] = <span class="nm">1</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">2</span>; i &lt;= n; i++)
+    dp[i] = dp[i-<span class="nm">1</span>] + dp[i-<span class="nm">2</span>];</pre>
+        <div class="label">House Robber</div>
+        <pre><span class="ty">int</span> prev2 = <span class="nm">0</span>, prev1 = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> num : nums) {
+    <span class="ty">int</span> curr = Math.<span class="mt">max</span>(prev1, prev2 + num);
+    prev2 = prev1;
+    prev1 = curr;
+}
+<span class="kw">return</span> prev1;</pre>
+        <div class="label">Longest Increasing Subsequence</div>
+        <pre><span class="ty">int</span>[] dp = <span class="kw">new</span> <span class="ty">int</span>[n];
+Arrays.<span class="mt">fill</span>(dp, <span class="nm">1</span>);
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">1</span>; i &lt; n; i++)
+    <span class="kw">for</span> (<span class="ty">int</span> j = <span class="nm">0</span>; j &lt; i; j++)
+        <span class="kw">if</span> (nums[j] &lt; nums[i])
+            dp[i] = Math.<span class="mt">max</span>(dp[i], dp[j] + <span class="nm">1</span>);
+<span class="kw">return</span> Arrays.<span class="mt">stream</span>(dp).<span class="mt">max</span>().<span class="mt">getAsInt</span>();</pre>
+        <div class="label">Coin Change (min coins)</div>
+        <pre><span class="ty">int</span>[] dp = <span class="kw">new</span> <span class="ty">int</span>[amount + <span class="nm">1</span>];
+Arrays.<span class="mt">fill</span>(dp, amount + <span class="nm">1</span>); <span class="cm">// fill with "infinity"</span>
+dp[<span class="nm">0</span>] = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">1</span>; i &lt;= amount; i++)
+    <span class="kw">for</span> (<span class="ty">int</span> coin : coins)
+        <span class="kw">if</span> (coin &lt;= i)
+            dp[i] = Math.<span class="mt">min</span>(dp[i], dp[i - coin] + <span class="nm">1</span>);
+<span class="kw">return</span> dp[amount] &gt; amount ? -<span class="nm">1</span> : dp[amount];</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot yellow"></div><h3>STRING DP PATTERNS</h3></div>
+      <div class="card-body">
+        <div class="label">Longest Palindromic Substring (expand around center)</div>
+        <pre><span class="ty">int</span> start = <span class="nm">0</span>, maxLen = <span class="nm">1</span>;
+
+<span class="kw">void</span> <span class="mt">expand</span>(<span class="ty">int</span> l, <span class="ty">int</span> r) {
+    <span class="kw">while</span> (l &gt;= <span class="nm">0</span> &amp;&amp; r &lt; n &amp;&amp; s.<span class="mt">charAt</span>(l) == s.<span class="mt">charAt</span>(r)) {
+        <span class="kw">if</span> (r - l + <span class="nm">1</span> &gt; maxLen) { start = l; maxLen = r-l+<span class="nm">1</span>; }
+        l--; r++;
+    }
+}
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++) {
+    <span class="mt">expand</span>(i, i);    <span class="cm">// odd length</span>
+    <span class="mt">expand</span>(i, i+<span class="nm">1</span>); <span class="cm">// even length</span>
+}</pre>
+        <div class="label">Decode Ways</div>
+        <pre><span class="ty">int</span>[] dp = <span class="kw">new</span> <span class="ty">int</span>[n+<span class="nm">1</span>];
+dp[<span class="nm">0</span>] = <span class="nm">1</span>;
+dp[<span class="nm">1</span>] = s.<span class="mt">charAt</span>(<span class="nm">0</span>) != <span class="st">'0'</span> ? <span class="nm">1</span> : <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">2</span>; i &lt;= n; i++) {
+    <span class="ty">int</span> one = Integer.<span class="mt">parseInt</span>(s.<span class="mt">substring</span>(i-<span class="nm">1</span>, i));
+    <span class="ty">int</span> two = Integer.<span class="mt">parseInt</span>(s.<span class="mt">substring</span>(i-<span class="nm">2</span>, i));
+    <span class="kw">if</span> (one >= <span class="nm">1</span>) dp[i] += dp[i-<span class="nm">1</span>];
+    <span class="kw">if</span> (two >= <span class="nm">10</span> &amp;&amp; two &lt;= <span class="nm">26</span>) dp[i] += dp[i-<span class="nm">2</span>];
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 14. 2D DP -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s14">
+  <div class="section-header">
+    <span class="section-id">14</span>
+    <span class="section-title">2D Dynamic Programming</span>
+    <span class="section-progress"><span class="done">0</span> / 16</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>2D DP PATTERNS</h3></div>
+      <div class="card-body">
+        <div class="label">Longest Common Subsequence</div>
+        <pre><span class="ty">int</span>[][] dp = <span class="kw">new</span> <span class="ty">int</span>[m+<span class="nm">1</span>][n+<span class="nm">1</span>];
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">1</span>; i &lt;= m; i++)
+    <span class="kw">for</span> (<span class="ty">int</span> j = <span class="nm">1</span>; j &lt;= n; j++) {
+        <span class="kw">if</span> (s1.<span class="mt">charAt</span>(i-<span class="nm">1</span>) == s2.<span class="mt">charAt</span>(j-<span class="nm">1</span>))
+            dp[i][j] = dp[i-<span class="nm">1</span>][j-<span class="nm">1</span>] + <span class="nm">1</span>;
+        <span class="kw">else</span>
+            dp[i][j] = Math.<span class="mt">max</span>(dp[i-<span class="nm">1</span>][j], dp[i][j-<span class="nm">1</span>]);
+    }
+<span class="kw">return</span> dp[m][n];</pre>
+        <div class="label">Unique Paths</div>
+        <pre><span class="ty">int</span>[][] dp = <span class="kw">new</span> <span class="ty">int</span>[m][n];
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; m; i++) dp[i][<span class="nm">0</span>] = <span class="nm">1</span>; <span class="cm">// first col</span>
+<span class="kw">for</span> (<span class="ty">int</span> j = <span class="nm">0</span>; j &lt; n; j++) dp[<span class="nm">0</span>][j] = <span class="nm">1</span>; <span class="cm">// first row</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">1</span>; i &lt; m; i++)
+    <span class="kw">for</span> (<span class="ty">int</span> j = <span class="nm">1</span>; j &lt; n; j++)
+        dp[i][j] = dp[i-<span class="nm">1</span>][j] + dp[i][j-<span class="nm">1</span>];
+<span class="kw">return</span> dp[m-<span class="nm">1</span>][n-<span class="nm">1</span>];</pre>
+        <div class="note warn">⚠ 2D DP grid: always initialize row 0 and col 0 explicitly as your base cases.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 15. GREEDY -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s15">
+  <div class="section-header">
+    <span class="section-id">15</span>
+    <span class="section-title">Greedy</span>
+    <span class="section-progress"><span class="done">1</span> / 14</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot yellow"></div><h3>GREEDY PATTERNS</h3></div>
+      <div class="card-body">
+        <div class="label">Jump Game (can reach end?)</div>
+        <pre><span class="ty">int</span> maxReach = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; nums.<span class="mt">length</span>; i++) {
+    <span class="kw">if</span> (i &gt; maxReach) <span class="kw">return false</span>;
+    maxReach = Math.<span class="mt">max</span>(maxReach, i + nums[i]);
+}
+<span class="kw">return true</span>;</pre>
+        <div class="label">Maximum Subarray (Kadane's)</div>
+        <pre><span class="ty">int</span> maxSum = nums[<span class="nm">0</span>], curr = nums[<span class="nm">0</span>];
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">1</span>; i &lt; nums.<span class="mt">length</span>; i++) {
+    curr = Math.<span class="mt">max</span>(nums[i], curr + nums[i]);
+    maxSum = Math.<span class="mt">max</span>(maxSum, curr);
+}</pre>
+        <div class="label">Merge Intervals</div>
+        <pre">Arrays.<span class="mt">sort</span>(intervals, (a,b) -> a[<span class="nm">0</span>] - b[<span class="nm">0</span>]);
+<span class="ty">List</span>&lt;<span class="ty">int</span>[]&gt; res = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+<span class="kw">for</span> (<span class="ty">int</span>[] interval : intervals) {
+    <span class="kw">if</span> (res.<span class="mt">isEmpty</span>() || res.<span class="mt">get</span>(res.<span class="mt">size</span>()-<span class="nm">1</span>)[<span class="nm">1</span>] &lt; interval[<span class="nm">0</span>])
+        res.<span class="mt">add</span>(interval);
+    <span class="kw">else</span>
+        res.<span class="mt">get</span>(res.<span class="mt">size</span>()-<span class="nm">1</span>)[<span class="nm">1</span>] = Math.<span class="mt">max</span>(res.<span class="mt">get</span>(res.<span class="mt">size</span>()-<span class="nm">1</span>)[<span class="nm">1</span>], interval[<span class="nm">1</span>]);
+}</pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 16. INTERVALS -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s16">
+  <div class="section-header">
+    <span class="section-id">16</span>
+    <span class="section-title">Intervals</span>
+    <span class="section-progress"><span class="done">0</span> / 7</span>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>INTERVAL CHEATSHEET</h3></div>
+      <div class="card-body">
+        <div class="label">Sort by start time</div>
+        <pre>Arrays.<span class="mt">sort</span>(intervals, (a,b) -> a[<span class="nm">0</span>] - b[<span class="nm">0</span>]);</pre>
+        <div class="label">Overlap condition</div>
+        <pre><span class="cm">// Two intervals [a,b] and [c,d] overlap if:</span>
+a[<span class="nm">1</span>] >= b[<span class="nm">0</span>]  <span class="cm">// end of first >= start of second</span></pre>
+        <div class="label">Meeting Rooms II — min heap of end times</div>
+        <pre">Arrays.<span class="mt">sort</span>(intervals, (a,b) -> a[<span class="nm">0</span>] - b[<span class="nm">0</span>]);
+<span class="ty">PriorityQueue</span>&lt;<span class="ty">Integer</span>&gt; heap = <span class="kw">new</span> <span class="ty">PriorityQueue</span>&lt;&gt;(); <span class="cm">// end times</span>
+<span class="kw">for</span> (<span class="ty">int</span>[] i : intervals) {
+    <span class="kw">if</span> (!heap.<span class="mt">isEmpty</span>() &amp;&amp; heap.<span class="mt">peek</span>() &lt;= i[<span class="nm">0</span>])
+        heap.<span class="mt">poll</span>(); <span class="cm">// room freed</span>
+    heap.<span class="mt">offer</span>(i[<span class="nm">1</span>]);
+}
+<span class="kw">return</span> heap.<span class="mt">size</span>(); <span class="cm">// rooms needed</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 17. MATH & GEOMETRY -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s17">
+  <div class="section-header">
+    <span class="section-id">17</span>
+    <span class="section-title">Math & Geometry</span>
+    <span class="section-progress"><span class="done">6</span> / 13</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>MATH UTILITIES</h3></div>
+      <div class="card-body">
+        <div class="label">Common Math methods</div>
+        <pre>Math.<span class="mt">abs</span>(x);
+Math.<span class="mt">max</span>(a, b);  Math.<span class="mt">min</span>(a, b);
+Math.<span class="mt">pow</span>(x, n);          <span class="cm">// returns double</span>
+Math.<span class="mt">sqrt</span>(x);            <span class="cm">// returns double</span>
+(<span class="ty">int</span>) Math.<span class="mt">sqrt</span>(x);     <span class="cm">// cast to int</span>
+Integer.MAX_VALUE;       <span class="cm">// 2^31 - 1</span>
+Integer.MIN_VALUE;       <span class="cm">// -2^31</span>
+Long.MAX_VALUE;
+(<span class="ty">long</span>) a * b;           <span class="cm">// avoid overflow</span></pre>
+        <div class="label">Modulo & GCD</div>
+        <pre><span class="ty">int</span> <span class="mt">gcd</span>(<span class="ty">int</span> a, <span class="ty">int</span> b) {
+    <span class="kw">return</span> b == <span class="nm">0</span> ? a : <span class="mt">gcd</span>(b, a % b);
+}
+x % mod;               <span class="cm">// always apply to avoid overflow</span></pre>
+        <div class="label">Rotate Matrix (in-place)</div>
+        <pre"><span class="cm">// 1. Transpose: swap [i][j] with [j][i]</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nm">0</span>; i &lt; n; i++)
+    <span class="kw">for</span> (<span class="ty">int</span> j = i+<span class="nm">1</span>; j &lt; n; j++) {
+        <span class="ty">int</span> tmp = matrix[i][j];
+        matrix[i][j] = matrix[j][i];
+        matrix[j][i] = tmp;
+    }
+<span class="cm">// 2. Reverse each row</span>
+<span class="kw">for</span> (<span class="ty">int</span>[] row : matrix)
+    <span class="cm">// reverse row (two pointers)</span></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>STRING METHODS</h3></div>
+      <div class="card-body">
+        <div class="label">Essential String operations</div>
+        <pre>s.<span class="mt">length</span>();               <span class="cm">// NOT .length</span>
+s.<span class="mt">charAt</span>(i);
+s.<span class="mt">substring</span>(l, r);       <span class="cm">// [l, r) exclusive</span>
+s.<span class="mt">toCharArray</span>();
+s.<span class="mt">indexOf</span>(c);
+s.<span class="mt">contains</span>(<span class="st">"abc"</span>);
+s.<span class="mt">startsWith</span>(<span class="st">"abc"</span>);
+s.<span class="mt">equals</span>(t);             <span class="cm">// NOT ==</span>
+s.<span class="mt">equalsIgnoreCase</span>(t);
+s.<span class="mt">toLowerCase</span>();
+s.<span class="mt">split</span>(<span class="st">","</span>);
+s.<span class="mt">trim</span>();
+<span class="ty">String</span>.<span class="mt">valueOf</span>(x);       <span class="cm">// int/char → String</span>
+<span class="ty">Integer</span>.<span class="mt">parseInt</span>(s);    <span class="cm">// String → int</span>
+<span class="ty">Character</span>.<span class="mt">isDigit</span>(c);
+<span class="ty">Character</span>.<span class="mt">isLetter</span>(c);
+<span class="ty">Character</span>.<span class="mt">toLowerCase</span>(c);</pre>
+        <div class="label">StringBuilder (for building strings)</div>
+        <pre><span class="ty">StringBuilder</span> sb = <span class="kw">new</span> <span class="ty">StringBuilder</span>();
+sb.<span class="mt">append</span>(x);
+sb.<span class="mt">reverse</span>();
+sb.<span class="mt">toString</span>();
+sb.<span class="mt">length</span>();
+sb.<span class="mt">charAt</span>(i);
+sb.<span class="mt">deleteCharAt</span>(i);</pre>
+        <div class="note warn">⚠ Never concatenate strings in a loop with +. Use StringBuilder.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 18. BIT MANIPULATION -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s18">
+  <div class="section-header">
+    <span class="section-id">18</span>
+    <span class="section-title">Bit Manipulation</span>
+    <span class="section-progress"><span class="done">6</span> / 10</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot purple"></div><h3>BIT OPERATIONS</h3></div>
+      <div class="card-body">
+        <div class="label">Operators</div>
+        <pre>a & b    <span class="cm">// AND</span>
+a | b    <span class="cm">// OR</span>
+a ^ b    <span class="cm">// XOR</span>
+~a       <span class="cm">// NOT</span>
+a << n   <span class="cm">// left shift  (×2 per shift)</span>
+a >> n   <span class="cm">// right shift (÷2 per shift)</span>
+a >>> n  <span class="cm">// unsigned right shift</span></pre>
+        <div class="label">Common tricks</div>
+        <pre"><span class="cm">// check if bit i is set</span>
+(n >> i) & <span class="nm">1</span>
+
+<span class="cm">// set bit i</span>
+n | (<span class="nm">1</span> << i)
+
+<span class="cm">// clear bit i</span>
+n & ~(<span class="nm">1</span> << i)
+
+<span class="cm">// check power of 2</span>
+n > <span class="nm">0</span> && (n & (n-<span class="nm">1</span>)) == <span class="nm">0</span>
+
+<span class="cm">// remove lowest set bit</span>
+n & (n-<span class="nm">1</span>)
+
+<span class="cm">// get lowest set bit</span>
+n & (-n)
+
+<span class="cm">// XOR: a ^ a = 0, a ^ 0 = a (Single Number)</span>
+<span class="ty">int</span> res = <span class="nm">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> n : nums) res ^= n;</pre>
+        <div class="label">Count set bits</div>
+        <pre"><span class="ty">int</span> <span class="mt">countBits</span>(<span class="ty">int</span> n) {
+    <span class="ty">int</span> count = <span class="nm">0</span>;
+    <span class="kw">while</span> (n != <span class="nm">0</span>) {
+        count += n & <span class="nm">1</span>;
+        n >>= <span class="nm">1</span>;
+    }
+    <span class="kw">return</span> count;
+}
+<span class="cm">// OR: Integer.bitCount(n)</span></pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<script>
+// Highlight active nav on scroll
+const sections = document.querySelectorAll('.section');
+const navBtns = document.querySelectorAll('.nav-btn');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      const idx = Array.from(sections).findIndex(s => s.id === id);
+      navBtns.forEach((btn, i) => {
+        btn.style.borderColor = i === idx ? 'var(--purple)' : 'var(--border)';
+        btn.style.color = i === idx ? 'var(--purple)' : 'var(--muted)';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

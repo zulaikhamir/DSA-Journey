@@ -28,17 +28,28 @@ public class ReverseLinkedList {
         Node prev = null;
         Node cur = head;
 
-        // Traverse the entire doubly linked list to reverse it
-        while (cur != null) {
-            prev = cur.prev;  // Store the previous pointer of the current node into 'prev' (acts like a temporary variable)
-            cur.prev = cur.next;  // Swap the 'prev' and 'next' pointers of the current node
-            cur.next = prev;      // Assign the originally stored 'prev' value (before swap) to 'next' pointer
-            cur = cur.prev;       // Move to the next node to be processed (originally the next node before swapping)
-        }
+//         // Traverse the entire doubly linked list to reverse it
+//         while (cur != null) {
+//             prev = cur.prev;  // Store the previous pointer of the current node into 'prev' (acts like a temporary variable)
+//             cur.prev = cur.next;  // Swap the 'prev' and 'next' pointers of the current node
+//             cur.next = prev;      // Assign the originally stored 'prev' value (before swap) to 'next' pointer
+//             cur = cur.prev;       // Move to the next node to be processed (originally the next node before swapping)
+//         }
 
-// After the loop ends, 'prev' will be pointing to the node *after* the new head,
-// so we return prev.prev to get the new head of the reversed list
-        return prev.prev;
+// // After the loop ends, 'prev' will be pointing to the node *after* the new head,
+// // so we return prev.prev to get the new head of the reversed list
+//         return prev.prev;
+Node lastProcessed = null;
+
+while (cur != null) {
+    prev = cur.prev;
+    cur.prev = cur.next;
+    cur.next = prev;
+    lastProcessed = cur;      // remember this node before moving
+    cur = cur.prev;           // move to next
+}
+
+return lastProcessed;         // this is the new head (originally the tail)
 
     }
 

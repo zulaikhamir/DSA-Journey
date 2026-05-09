@@ -15,7 +15,9 @@ public class DeleteKthNaive {
     }
 
     static Node deleteKth(Node head, int k) {
+
         // This is missing:
+        //ist find size of circular linked list to check if k is valid
         if (k > size) { throw new IllegalArgumentException("k out of bounds"); }
 
         // Case 1: empty list
@@ -50,6 +52,7 @@ public class DeleteKthNaive {
         Node cur = head;
 
         // move to (k-1)th node
+        // if we do k-1 then cur will stop at kth node and we won't be able to update next pointer of (k-1)th node
         for (int i = 0; i < k - 2; i++) {
             cur = cur.next;
         }
@@ -122,187 +125,187 @@ public class DeleteKthEfficient {
 
 
 
-// public class DeleteKthElement {
+public class DeleteKthElement {
 
-//     public static void main(String[] args) {
+    public static void main(String[] args) {
 
-//         Node head = new Node(10);
-//         head.next = new Node(20);
-//         head.next.next = new Node(30);
-//         head.next.next.next = new Node(40);
-//         head.next.next.next.next = head;
+        Node head = new Node(10);
+        head.next = new Node(20);
+        head.next.next = new Node(30);
+        head.next.next.next = new Node(40);
+        head.next.next.next.next = head;
 
-//         int k = 2;
+        int k = 2;
 
-//         head = deleteeff(head, k);
+        head = deleteeff(head, k);
 
-//         Node p = head;
+        Node p = head;
 
-//         do {
-//             System.out.println(p.data);
+        do {
+            System.out.println(p.data);
 
-//             p = p.next;
-//         } while (p != head);
+            p = p.next;
+        } while (p != head);
 
-//     }
+    }
 
-//     static class Node {
+    static class Node {
 
-//         int data;
-//         Node next;
+        int data;
+        Node next;
 
-//         Node(int data) {
-//             this.data = data;
-//             this.next = null;
-//         }
-//     }
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
 
-//     static Node deleteeff(Node head, int k) {
+    static Node deleteeff(Node head, int k) {
 
-//         if (head == null) {
+        if (head == null) {
 
-//             return null;
-//         }
-//         if (k == 1) {
-//             if (head.next == head) {
-//                 return null; // Only one node
-//             }
-//             head.data = head.next.data;
-//             head.next = head.next.next;
-//             return head;
-//         }
+            return null;
+        }
+        if (k == 1) {
+            if (head.next == head) {
+                return null; // Only one node
+            }
+            head.data = head.next.data;
+            head.next = head.next.next;
+            return head;
+        }
 
-//         Node cur = head;
-//         for (int i = 0; i < k - 2; i++) {
-//             cur = cur.next;
-//         }
-//         cur.next = cur.next.next;
-//         return head;
+        Node cur = head;
+        for (int i = 0; i < k - 2; i++) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+        return head;
 
-//     }
+    }
 
-// }
-// Why (k-2)?
+}
+Why (k-2)?
 
-// Because cur needs to stand just before the node to be deleted.
-// For example:
-// To delete 3rd node:
-// You need to move 1 step from head (3 - 2 = 1).
+Because cur needs to stand just before the node to be deleted.
+For example:
+To delete 3rd node:
+You need to move 1 step from head (3 - 2 = 1).
 
-// # Summary — why we use `this`
+# Summary — why we use `this`
 
-// ## Core idea
+## Core idea
 
-// `this` refers to the **current object**.
+`this` refers to the **current object**.
 
-// It tells Java:
+It tells Java:
 
-// > "Use the variable that belongs to this object, not the local parameter."
+> "Use the variable that belongs to this object, not the local parameter."
 
-// ---
+---
 
-// # When `this` is REQUIRED
+# When `this` is REQUIRED
 
-// When constructor parameter name is same as instance variable name.
+When constructor parameter name is same as instance variable name.
 
-// Example:
+Example:
 
-// ```java
-// class Node {
+```java
+class Node {
 
-//     int data;
+    int data;
 
-//     Node(int data) {
+    Node(int data) {
 
-//         this.data = data;
-//     }
-// }
-// ```
+        this.data = data;
+    }
+}
+```
 
-// Without `this`:
+Without `this`:
 
-// ```java
-// Node(int data) {
-//     data = data;   // wrong
-// }
-// ```
+```java
+Node(int data) {
+    data = data;   // wrong
+}
+```
 
-// Both `data` refer to parameter → instance variable never gets value.
+Both `data` refer to parameter → instance variable never gets value.
 
-// Object remains:
+Object remains:
 
-// ```
-// data = 0   (default int value)
-// ```
+```
+data = 0   (default int value)
+```
 
-// ---
+---
 
-// # When `this` is OPTIONAL
+# When `this` is OPTIONAL
 
-// When parameter name is different.
+When parameter name is different.
 
-// Example:
+Example:
 
-// ```java
-// Node(int d) {
+```java
+Node(int d) {
 
-//     data = d;
-// }
-// ```
+    data = d;
+}
+```
 
-// Java understands:
+Java understands:
 
-// ```
-// instance variable = parameter
-// ```
+```
+instance variable = parameter
+```
 
-// ---
+---
 
-// # Why developers still use `this`
+# Why developers still use `this`
 
-// Consistency and readability.
+Consistency and readability.
 
-// Cleaner:
+Cleaner:
 
-// ```java
-// this.data = data;
-// this.next = null;
-// ```
+```java
+this.data = data;
+this.next = null;
+```
 
-// instead of mixing styles.
+instead of mixing styles.
 
-// ---
+---
 
-// # In your Node class
+# In your Node class
 
-// Both are correct:
+Both are correct:
 
-// ### Version 1
+### Version 1
 
-// ```java
-// Node(int d) {
+```java
+Node(int d) {
 
-//     data = d;
-// }
-// ```
+    data = d;
+}
+```
 
-// ### Version 2 (preferred style)
+### Version 2 (preferred style)
 
-// ```java
-// Node(int data) {
+```java
+Node(int data) {
 
-//     this.data = data;
-// }
-// ```
+    this.data = data;
+}
+```
 
-// ---
+---
 
-// # One-line rule
+# One-line rule
 
-// Use `this` when:
+Use `this` when:
 
-// ```
-// parameter name == instance variable name
-// ```
+```
+parameter name == instance variable name
+```
 
-// so Java knows which one you mean.
+so Java knows which one you mean.
