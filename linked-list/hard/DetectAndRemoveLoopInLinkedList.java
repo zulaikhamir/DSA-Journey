@@ -22,7 +22,8 @@ void removeLoop(Node head) {
         if(slow==fast){
             break;
         }
-    }  if(slow==fast){
+    }
+    if(slow==fast){
         slow=head;
         while(slow.next!=fast.next){
             slow=slow.next;

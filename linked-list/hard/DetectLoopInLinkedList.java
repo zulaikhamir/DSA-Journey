@@ -12,6 +12,13 @@ struct Node {
 }
 //modifications to linked list pointer reference
 //time and space complexity O(n) and O(1) respectively
+// This is the destructive marking approach. It detects a cycle by mutating the list — pointing every visited node's next to a sentinel node (temp).
+// The logic:
+
+// If you ever see a node whose next is already temp, you've visited it before → cycle exists
+// If you reach null, no cycle
+
+// The problem: it destroys the original list. Every node's next gets overwritten. You can never traverse this list again after calling this method. That's why it's rarely used.
 public boolean hasCycle(Node head) {
     Node temp= new node;
     Node curr=head;

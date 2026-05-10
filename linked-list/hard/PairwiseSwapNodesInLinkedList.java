@@ -35,7 +35,7 @@ Node pairwiseSwap(Node head) {
     head=second;
     while(first!=null && second!=null){
         Node next=second.next;
-        second.next=first;
+        second.next=first;// we point second node to the first node  so second will be the new head of the linked list and first will be the second node of the linked list  we dont dont do second=first becuase it will be then changing the values of the nodes and we want to swap the nodes themselves not the values of the nodes
         if(next==null || next.next==null){
             first.next=next;
             break;
