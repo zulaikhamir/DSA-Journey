@@ -33,7 +33,7 @@ static boolean  ispower2(int n){
 		return false;
 	}
 
-	return (n&(n-1))==0;
+	return (n&(n-1))==0;//how does this work? if n is power of 2 then it has only one set bit and n-1 will have all bits set after that bit so when we do n & (n-1) it will be 0 if n is power of 2 otherwise it will be non zero
 	}
 }
 //if no  is pwer of 2 it has only one set bit

@@ -20,13 +20,13 @@ public class LookupTableSetBits {
         // Extract each byte (8 bits) and sum the set bits using the lookup table
 
         int res = table[n & 0xff]; // Count set bits in the least significant 8 bits
-        n = n >> 8;                // Shift right by 8 bits to get the next byte
+        n = n >>> 8;                // Shift right by 8 bits to get the next byte
 
         res = res + table[n & 0xff]; // Count set bits in the next 8 bits
-        n = n >> 8;                  // Shift right again
+        n = n >>> 8;                  // Shift right again
 
         res = res + table[n & 0xff]; // Count set bits in the third byte
-        n = n >> 8;                  // Shift right again
+        n = n >>> 8;                  // Shift right again
 
         res = res + table[n & 0xff]; // Count set bits in the most significant 8 bits
 

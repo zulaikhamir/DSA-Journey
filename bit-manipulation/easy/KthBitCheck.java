@@ -1,3 +1,6 @@
+//the question is to check if the kth bit of a number is set or not
+
+
 public class KthBitCheck{
 	public static void main(String[] args) {
 
