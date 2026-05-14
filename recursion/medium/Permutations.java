@@ -15,6 +15,13 @@ public class Permutations {
             char ch = str.charAt(i);
 
             String ros = str.substring(0, i) + str.substring(i + 1);
+// This removes str.charAt(i) from the string. Example with str = "abc" and i = 1:
+
+// str.substring(0, 1) → "a" (everything before index 1)
+// str.substring(2) → "c" (everything after index 1)
+// ros → "a" + "c" → "ac"
+
+// Character 'b' has been removed. This is how you avoid reusing the same character.
 
             permute(ros, result + ch);
         }

@@ -16,8 +16,8 @@ public class PowerRecursive {
 
         int x = 2;
         int n = 3;
-        int res = power(x, n);
-        System.out.println(+res);
+        int res = power(x, n);// we are checking 3 to the power of 2
+        System.out.println(res);
 
     }
 
