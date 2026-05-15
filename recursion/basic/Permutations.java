@@ -12,9 +12,15 @@ public class Permutations {
         }
 
         for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
+            char ch = str.charAt(i);//pick a character
 
-            String ros = str.substring(0, i) + str.substring(i + 1);
+            String ros = str.substring(0, i) + str.substring(i + 1);//remove it from remaning string
+
+
+            permute(ros, result + ch);//recurse with remaining string and result
+        }
+    }
+}
 // This removes str.charAt(i) from the string. Example with str = "abc" and i = 1:
 
 // str.substring(0, 1) → "a" (everything before index 1)
@@ -22,8 +28,3 @@ public class Permutations {
 // ros → "a" + "c" → "ac"
 
 // Character 'b' has been removed. This is how you avoid reusing the same character.
-
-            permute(ros, result + ch);
-        }
-    }
-}
