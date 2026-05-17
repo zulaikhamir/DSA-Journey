@@ -1,4 +1,4 @@
-
+//what this problem asks is that we have to find the number of subsets in the given array whose sum is equal to the given sum
 public class SubsetSum {
 
     public static void main(String[] args) {

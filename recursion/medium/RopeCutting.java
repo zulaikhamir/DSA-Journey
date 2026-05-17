@@ -1,4 +1,4 @@
-
+//the problem is to cut the rope into maximum number of pieces of given lengths a, b and c
 public class RopeCutting {
 
     public static void main(String[] args) {
