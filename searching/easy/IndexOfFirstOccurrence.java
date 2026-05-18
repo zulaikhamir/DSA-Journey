@@ -15,17 +15,18 @@
 // }
 // public class IndexOfFirstOccurrence {//recursive
 //     public static void main(String[] args) {
-//         int[] arr = {1, 4, 2, 5, 6, 7, 4, 5, 3, 9, 0};
+//         //int[] arr = {1, 4, 2, 5, 6, 7, 4, 5, 3, 9, 0};//the array should be sorted for binary search to work
+//         int[] arr = {0, 1, 2, 3, 4, 4, 5, 5, 6, 7, 9};
 //         int n = arr.length;
 //         int x = 5;
 //         int low = 0;
 //         int high = n - 1;
 //         int z = firstocc(arr, low, high, x);
-//         if (z > 0) {
-//             System.out.println(z);
-//         } else {
-//             System.out.println("not present");
-//         }
+// if (z != -1) {
+//     System.out.println(z);
+// } else {
+//     System.out.println("not present");
+// }
 //     }
 //     // Function to find the first occurrence of 'x' in sorted array 'arr'
 //     static int firstocc(int[] arr, int low, int high, int x) {
@@ -46,8 +47,8 @@
 //             // Check if it's the first occurrence:
 //             // - either it's the first element of array (mid == 0)
 //             // - or previous element is not equal to current element
-//             if ((mid == 0) || arr[mid - 1] != arr[mid]) {
-//                 return mid;  // This is the first occurrence
+//             if ((mid == 0) || arr[mid - 1] != arr[mid]) {//this makes sense only when we have array sorted
+//                 return mid;  // This is the first occurrence//Previous element is different — so mid is the first match
 //             } else {
 //                 // Otherwise, there might be earlier occurrence — search in left half
 //                 return firstocc(arr, low, mid - 1, x);
@@ -55,6 +56,7 @@
 //         }
 //     }
 // }
+
 public class IndexOfFirstOccurrence {//iterative
 
     public static void main(String[] args) {
@@ -65,7 +67,7 @@ public class IndexOfFirstOccurrence {//iterative
         int low = 0;
         int high = n - 1;
         int z = firstocc(arr, low, high, x);
-        if (z > 0) {
+        if (z != -1) {
             System.out.println(z);
         } else {
             System.out.println("not present");
@@ -84,7 +86,7 @@ public class IndexOfFirstOccurrence {//iterative
                     high = mid - 1;
                 } else if (mid == 0 || arr[mid - 1] != arr[mid]) {
                     return mid;
-                      
+
                 ///here we are returning our answer
                 } else {
                     high = mid - 1;

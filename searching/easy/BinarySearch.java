@@ -1,3 +1,4 @@
+//leetcode 704
 public class BinarySearch{
 	public static void main(String[] args) {
 		int [] arr={10, 20, 30, 40, 50, 60, 70};
@@ -14,18 +15,18 @@ public class BinarySearch{
 				return;
 			}
 
-			
+
 			else{
 				if(arr[mid]<k){
 					low=mid+1;
 				}
-			
+
 			else {
 				high=mid-1;
 			}
-			
+
 			}
-			
+
 		}
 	}
 }

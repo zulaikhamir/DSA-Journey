@@ -1,4 +1,4 @@
-
+//leetcode 34
 public class CountOccurrences {
 
     public static void main(String[] args) {
@@ -21,8 +21,8 @@ public class CountOccurrences {
             return 0; // Element not found
         } else {
             int last = lastocc(arr, 0, n - 1, x);
-            return last - first + 1;
-            //This line calculates the total number of occurrences of the element by subtracting the index of 
+            return last - first + 1;//The formula last - first + 1 works because the array is sorted and duplicates are contiguous.
+            //This line calculates the total number of occurrences of the element by subtracting the index of
             //the first occurrence from the index of the last occurrence and adding 1, since both indices are inclusive.
 
         }

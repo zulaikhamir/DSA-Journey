@@ -1,4 +1,4 @@
-
+//leetcode problem: https://leetcode.com/problems/count-sorted-vowel-strings/description/
 public class CountOnes {
 
     public static void main(String[] args) {

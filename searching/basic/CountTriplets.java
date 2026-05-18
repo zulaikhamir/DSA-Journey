@@ -1,4 +1,4 @@
-
+//the leetcode problem is https://leetcode.com/problems/3sum/description/
 import java.util.Arrays;
 
 public class CountTriplets {
