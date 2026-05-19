@@ -1,6 +1,9 @@
+//leetcode 167
+//twosum2
+
 
 // public class TwoPointerTechnique {//check if array has a pair with given sum
-//     // we use two pointer approach for sorted arrays if we have unsosrted array we use naive solution
+//     // we use two pointer approach for sorted arrays if we have unsorted array we use naive solution
 //     public static void main(String[] args) {
 //         int[] arr = {1, 5, 2, 7, 4, 8, 5, 3};
 //         int x = 11;
@@ -14,6 +17,8 @@
 //         }
 //     }
 // }
+//the question is to check if there is a pair with given sum in sorted array
+//its also called as two sum problem
 public class TwoPointerTechnique {
 
     public static void main(String[] args) {

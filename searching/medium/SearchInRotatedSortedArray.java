@@ -2,7 +2,7 @@
 public class SearchInRotatedSortedArray {
 
     public static void main(String[] args) {
-        int[] arr = {40, 50, 60, 70, 10, 30, 20};
+        int[] arr = {40, 50, 60, 70, 10,  20, 30};
         int x = 30;
         int z = sorted(arr, x);
         if (z >= 0) {
@@ -24,15 +24,15 @@ public class SearchInRotatedSortedArray {
                 return mid;
             }
 
-            if (arr[low] < arr[mid]) {//it means left half is sorted
-                if (x >= arr[low] && x < arr[mid]) {//checking if x lies in the range and if array is sorted 
+            if (arr[low] <= arr[mid]) {//it means left half is sorted
+                if (x >= arr[low] && x < arr[mid]) {//checking if x lies in the range and if array is sorted
                     high = mid - 1;
                 } else {
                     low = mid + 1;
                 }
 
-            } else {//it means right half is sorted 
-                if (x <= arr[high] && x > arr[mid]) {//checking if x lies in the range and if array is sorted 
+            } else {//it means right half is sorted
+                if (x <= arr[high] && x > arr[mid]) {//checking if x lies in the range and if array is sorted
                     low = mid + 1;
                 } else {
                     high = mid - 1;

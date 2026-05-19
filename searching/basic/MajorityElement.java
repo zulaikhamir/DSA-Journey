@@ -1,9 +1,9 @@
 
 public class MajorityElement {//an element which appears more than n/2 times in an array
-//naive solution 
+//naive solution
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 2, 3, 3, 3};
+        int[] arr = {1, 2, 2, 3, 3, 3, 3};
         int n = arr.length;
         int majorityCount = n / 2;
         boolean found = false;
@@ -11,7 +11,7 @@ public class MajorityElement {//an element which appears more than n/2 times in 
         for (int i = 0; i < n; i++) {
             int count = 0;
             for (int j = 0; j < n; j++) {
-                if (arr[i] == arr[j]) {
+                if ( arr[i] == arr[j]) {
                     count++;
                 }
             }
