@@ -183,6 +183,15 @@ A strategic order to tackle topics, building from foundations to advanced concep
   - `deque/hard/` - MaxInSubarraysEfficient
 - **Linked List - Medium**: All files in `linked-list/medium/`
 
+### 5.4 Trees (Basic → Easy → Medium → Hard)
+- **Why now**: Fundamental non-linear data structure, bridge to Graphs and advanced DP.
+- **Order**:
+  1. `trees/basic/` - BinaryTreeTraversal (Inorder, Preorder, Postorder)
+  2. `trees/easy/` - BSTSearch, HeightOfTree, SizeOfTree
+  3. `trees/medium/` - LevelOrderTraversal, LeftView, BinaryTreeToDLL
+  4. `trees/hard/` - SerializeDeserialize, TreeTraversals (Iterative)
+- **Skills**: Hierarchical data, recursion on trees, BST properties
+
 ---
 
 ## 📚 Phase 6: Mastery (Weeks 15+)
@@ -210,9 +219,9 @@ Patterns → Math → Arrays → Strings
                 ↓
          Sorting → Searching
                 ↓
-         Recursion → Dynamic Programming
+         Recursion → Trees → Dynamic Programming
                 ↓
-         Hashing, Bit Manipulation, Matrix (can be parallel)
+         Hashing, Bit Manipulation, Matrix, Graphs (can be parallel)
 ```
 
 ## 💡 Tips for Success
