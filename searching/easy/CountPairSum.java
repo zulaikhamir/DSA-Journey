@@ -1,4 +1,5 @@
-
+//leetcode problem is https://leetcode.com/problems/two-sum/description/
+//the problem asks me to is to find if there is a pair in the array whose sum is equal to the target
 import java.util.Arrays;
 
 public class CountPairSum {

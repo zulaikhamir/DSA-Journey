@@ -1,4 +1,5 @@
-
+//leetcode 1.0
+//this asks us to find if there exists a triplet (a, b, c) such that a^2 + b^2 = c^2
 import java.util.Arrays;
 
 public class PythagoreanTriplet {
@@ -18,7 +19,7 @@ public class PythagoreanTriplet {
 
         // Square all elements
         for (int i = 0; i < n; i++) {
-            arr[i] = arr[i] * arr[i];
+            arr[i] = arr[i] * arr[i];//i am mutating the original array to save space, if we want to keep the original array intact, we can create a new array to store the squares
         }
 
         // Sort the squared array

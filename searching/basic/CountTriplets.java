@@ -1,4 +1,5 @@
 //the leetcode problem is https://leetcode.com/problems/3sum/description/
+//this is not exact leetcode problem but it is similar to that problem. In this problem we have to count the number of triplets in the array whose sum is equal to the target value. We can solve this problem using two pointers technique after sorting the array.
 import java.util.Arrays;
 
 public class CountTriplets {
@@ -16,7 +17,7 @@ public class CountTriplets {
         int n = arr.length;
         int count = 0;
 
-        for (int i = 0; i < n - 2; i++) {
+        for (int i = 0; i < n - 2; i++) {//n-2 because i need to have two more elements to form a triplet after it
             int left = i + 1;
             int right = n - 1;
 
