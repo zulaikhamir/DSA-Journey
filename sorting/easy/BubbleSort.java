@@ -31,10 +31,10 @@ public class BubbleSort{
                     swapped=true;//if swapping is done then set swapped to true
                 }
              }
-             if(!swapped){
+             if(!swapped){//means if swapped is false then no swapping is done in a pass then the array is already sorted
                 break;//if no swapping is done in a pass then the array is already sorted
              }
 
+         }
     }
-}
 }
