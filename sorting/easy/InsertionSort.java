@@ -9,11 +9,13 @@ public class InsertionSort{
             int key = arr[i];
             int j = i - 1;
             // Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position
-            while (j >= 0 && arr[j] > key) {
+            while (j >= 0 && arr[j] > key) {// we are not using arr[j] >= key because we want to maintain the stability of the sorting algorithm and if we use arr[j] >= key then we will be overwriting the element at j+1 which is equal to key and we will lose the relative order of equal elements
+                //can i do arr[j]==key? no because we want to maintain the stability of the sorting algorithm and if we use arr[j]==key then we will be overwriting the element at j+1 which is equal to key and we will lose the relative order of equal elements
                 arr[j + 1] = arr[j];//shift the element to the right //are we overwriting the element at j+1? no because we are shifting the element to the right and we will insert the key at the correct position after the while loop
                 j = j - 1;
             }
-            arr[j + 1] = key;
+            arr[j + 1] = key;// we are overriding  the number with itself in case its already sorted
+
         }
     }
 }
