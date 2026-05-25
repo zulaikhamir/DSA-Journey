@@ -26,7 +26,7 @@ public class IntersectionOfTwoSortedArrays {
 
 //efficeint solution
 //o(m+n) time complexity
-//approach: two pointers or merge sort approach
+//approach: two pointers or merge sort approach  but it only works if the arrays are sorted, if they are not sorted we can sort them first and then apply this approach. we can also use hash map to store the frequency of elements in one array and then iterate through the other array to find the intersection but that would take O(m+n) time complexity and O(m) space complexity, so the two pointers approach is more efficient in terms of space complexity.
 
 public class IntersectionOfTwoSortedArrays {
     public int[] intersect(int[] nums1, int[] nums2) {
@@ -35,6 +35,7 @@ public class IntersectionOfTwoSortedArrays {
         int i = 0, j = 0, k = 0;
         int[] result = new int[Math.min(m, n)];
         while(i < m && j < n){
+            if(i>0 && nums1[i] == nums1[i-1]) continue;
             if(nums1[i] == nums2[j]){
                 result[k++] = nums1[i];
                 i++;
