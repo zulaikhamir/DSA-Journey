@@ -34,4 +34,41 @@ class SortTwoTypes {
 //efficient solution
 // o(n) time and o(1) space
 //need to learn quick sort partitioning technique for this solution
+// we will solve it using hoare partitioning technique
+class SortTwoTypes {
+    public static void sortTwoTypes(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            while (left < right && arr[left] < 0) {
+                left++;
+            }
+            while (left < right && arr[right] >= 0) {
+                right--;
+            }
+            if (left < right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+}
 
+
+// Is this actually Hoare partition?
+
+// Not exactly.
+
+// In classical Hoare partition:
+
+// You choose a pivot (for example, the first element).
+// Elements < pivot go to one side and > pivot go to the other.
+
+// Here, there is no pivot. The partitioning criterion is simply:
+
+// even | odd
+
+// So this is Hoare-style two-pointer partitioning, inspired by Hoare's algorithm, but adapted for a boolean condition rather than a pivot value.
