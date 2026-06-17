@@ -59,19 +59,75 @@ class Solution {
 class Solution {
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals,(a,b)->a[0]-b[0]);
-        List<int[]> res = new ArrayList<>();
-        int start = intervals[0][0];
-        int end = intervals[0][1];
-        for(int i=1;i<intervals.length;i++){
-            if(intervals[i][0]<=end){
-                end = Math.max(end,intervals[i][1]);
+        //break down this code Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+        //Arrays.sort is a built-in method in Java that sorts an array. In this case, we are sorting the 2D array 'intervals' based on the first element of each sub-array (the start time of the interval).
+        //The second argument is a lambda expression that defines the sorting order. It takes two sub-arrays 'a' and 'b' as input and returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second. In this case, we are comparing the first elements of the sub-arrays (a[0] and b[0]) to determine their order in the sorted array.
+        List<int[]> res = new ArrayList<>();// list to store the merged intervals
+        int start = intervals[0][0];// initialize the start time of the first interval
+        int end = intervals[0][1];// initialize the end time of the first interval
+        for(int i=1;i<intervals.length;i++){// iterate through the sorted intervals starting from the second interval
+            if(intervals[i][0]<=end){// if the start time of the current interval is less than or equal to the end time of the previous interval, it means they overlap
+                end = Math.max(end,intervals[i][1]);// update the end time to the maximum of the current end time and the end time of the current interval
             }else{
-                res.add(new int[]{start,end});
-                start = intervals[i][0];
-                end = intervals[i][1];
+                res.add(new int[]{start,end});// if they don't overlap, add the previous interval to the result list
+                start = intervals[i][0];// update the start time to the current interval
+                end = intervals[i][1];// update the start and end time to the current interval
             }
         }
-        res.add(new int[]{start,end});
-        return res.toArray(new int[res.size()][]);
+        res.add(new int[]{start,end});// add the last merged interval to the result list
+        return res.toArray(new int[res.size()][]);// convert the result list to a 2D array and return it
     }
 }
+
+
+// The lambda
+
+// (a, b) -> a[0] - b[0]
+
+// is just a shorter way of writing:
+
+// new Comparator<int[]>() {
+//     @Override
+//     public int compare(int[] a, int[] b) {
+//         return a[0] - b[0];
+//     }
+// }
+
+// So these two are equivalent:
+
+// Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
+// and
+
+// Arrays.sort(intervals, new Comparator<int[]>() {
+//     @Override
+//     public int compare(int[] a, int[] b) {
+//         return a[0] - b[0];
+//     }
+// });
+
+// The lambda is simply a more concise syntax.
+// One important improvement
+
+// Using subtraction can overflow if the numbers are very large.
+
+// For example:
+
+// a[0] = Integer.MAX_VALUE
+// b[0] = -1
+
+// a[0] - b[0]
+
+// can overflow and produce an incorrect result.
+
+// A safer version is:
+
+// Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+// Integer.compare returns:
+
+// a negative number if a[0] < b[0]
+// 0 if they are equal
+// a positive number if a[0] > b[0]
+
+// without risking integer overflow.
