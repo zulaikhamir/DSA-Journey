@@ -4,7 +4,7 @@
 // 1 2 3 4
 // 5 6 7 8
 // 9 10 11 12
-// After 90° clockwise rotation:
+// After 90° anticlockwise rotation:
 // 9 5 1
 // 10 6 2
 // 11 7 3

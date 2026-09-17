@@ -29,7 +29,7 @@ public class Transpose {
         // Transposing by swapping indices
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
-                transposed[j][i] = mat[i][j];
+                transposed[j][i] = mat[i][j];//swapping indices
             }
         }
 

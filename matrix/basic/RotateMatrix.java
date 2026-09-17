@@ -1,4 +1,14 @@
-
+// This program rotates a square matrix by 90 degrees clockwise in place. 
+// The rotation is achieved in two steps: first, the matrix is transposed (swapping elements across the diagonal),
+//  and then each row of the transposed matrix is reversed.
+//example
+// 1 2 3
+// 4 5 6
+// 7 8 9
+// After 90° clockwise rotation:
+// 7 4 1
+// 8 5 2
+// 9 6 3
 public class RotateMatrix {
 
     public static void rotate(int[][] matrix) {
