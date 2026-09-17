@@ -3,19 +3,19 @@
 //below soln is naive soln and the time complexity is O(n^2) and space complexity is O(1)
 //worst case is when the array is sorted in ascending order and we have to check all the previous elements for each element. 
 
-// public class StockSpan {//naive solution
+public class StockSpan {//naive solution
 
-//     public static void main(String[] args) {
-//         int[] arr = {1, 2, 5, 7, 3, 5, 9, 6, 0, 7};
-//         for (int i = 0; i < arr.length; i++) {
-//             int span = 1;
-//             for (int j = i - 1; j >= 0 && arr[j] <= arr[i]; j--) {
-//                 span++;
-//             }
-//             System.out.println(+span);
-//         }
-//     }
-// }
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 5, 7, 3, 5, 9, 6, 0, 7};
+        for (int i = 0; i < arr.length; i++) {
+            int span = 1;
+            for (int j = i - 1; j >= 0 && arr[j] <= arr[i]; j--) {
+                span++;
+            }
+            System.out.println(+span);
+        }
+    }
+}
 
 
 //efficient soln linear time complexity O(n) and space complexity O(n) using stack

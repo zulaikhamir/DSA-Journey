@@ -323,6 +323,7 @@ pre {
   <button class="nav-btn" onclick="document.getElementById('s16').scrollIntoView()">Intervals</button>
   <button class="nav-btn" onclick="document.getElementById('s17').scrollIntoView()">Math</button>
   <button class="nav-btn" onclick="document.getElementById('s18').scrollIntoView()">Bit Manip</button>
+  <button class="nav-btn" onclick="document.getElementById('s19').scrollIntoView()">Design</button>
 </nav>
 
 <div class="hero">
@@ -1566,6 +1567,72 @@ n & (-n)
     <span class="kw">return</span> count;
 }
 <span class="cm">// OR: Integer.bitCount(n)</span></pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 19. DESIGN -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section" id="s19">
+  <div class="section-header">
+    <span class="section-id">19</span>
+    <span class="section-title">Design</span>
+    <span class="section-progress"><span class="done">3</span> / 4</span>
+  </div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>MIN STACK</h3></div>
+      <div class="card-body">
+        <div class="label">Second stack mirrors the running minimum</div>
+        <pre><span class="ty">Stack</span>&lt;<span class="ty">Integer</span>&gt; stack = <span class="kw">new</span> <span class="ty">Stack</span>&lt;&gt;();
+<span class="ty">Stack</span>&lt;<span class="ty">Integer</span>&gt; minStack = <span class="kw">new</span> <span class="ty">Stack</span>&lt;&gt;();
+
+<span class="kw">void</span> <span class="mt">push</span>(<span class="ty">int</span> val) {
+    stack.<span class="mt">push</span>(val);
+    minStack.<span class="mt">push</span>(minStack.<span class="mt">isEmpty</span>() ? val : <span class="ty">Math</span>.<span class="mt">min</span>(val, minStack.<span class="mt">peek</span>()));
+}
+<span class="kw">void</span> <span class="mt">pop</span>() { stack.<span class="mt">pop</span>(); minStack.<span class="mt">pop</span>(); }
+<span class="ty">int</span> <span class="mt">getMin</span>() { <span class="kw">return</span> minStack.<span class="mt">peek</span>(); }</pre>
+        <div class="note info">When to reach for this: any "track the min/max alongside a stack" ask. O(1) for every operation.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot teal"></div><h3>QUEUE FROM TWO STACKS</h3></div>
+      <div class="card-body">
+        <div class="label">"in" stack for push, "out" stack for pop/peek</div>
+        <pre><span class="ty">Stack</span>&lt;<span class="ty">Integer</span>&gt; in = <span class="kw">new</span> <span class="ty">Stack</span>&lt;&gt;(), out = <span class="kw">new</span> <span class="ty">Stack</span>&lt;&gt;();
+
+<span class="kw">void</span> <span class="mt">push</span>(<span class="ty">int</span> x) { in.<span class="mt">push</span>(x); }
+
+<span class="ty">int</span> <span class="mt">pop</span>() {
+    <span class="kw">if</span> (out.<span class="mt">isEmpty</span>())
+        <span class="kw">while</span> (!in.<span class="mt">isEmpty</span>()) out.<span class="mt">push</span>(in.<span class="mt">pop</span>());
+    <span class="kw">return</span> out.<span class="mt">pop</span>();
+}</pre>
+        <div class="note tip">Only transfer in&rarr;out when out is empty. Amortized O(1) per op, not O(1) worst case.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="dot red"></div><h3>LRU / LFU CACHE</h3></div>
+      <div class="card-body">
+        <div class="label">LRU: HashMap + doubly linked list</div>
+        <pre><span class="cm">// HashMap&lt;key, Node&gt; for O(1) lookup</span>
+<span class="cm">// Doubly linked list keeps usage order: head = most recent, tail = least recent</span>
+<span class="cm">// get(key): move node to head, return value</span>
+<span class="cm">// put(key,val): insert at head; if over capacity, evict tail.prev</span></pre>
+        <div class="label">LFU: adds a frequency dimension</div>
+        <pre><span class="cm">// HashMap&lt;key, val&gt;, HashMap&lt;key, freq&gt;</span>
+<span class="cm">// HashMap&lt;freq, LinkedHashSet&lt;key&gt;&gt; buckets keys by frequency</span>
+<span class="cm">// minFreq pointer: evict from freqToKeys.get(minFreq), oldest entry (LinkedHashSet order)</span>
+<span class="cm">// on access: remove key from old freq bucket, bump freq, reinsert; bump minFreq if bucket emptied</span></pre>
+        <div class="note warn">⚠ Common pitfall: forgetting to bump minFreq when the old bucket becomes empty — silently evicts the wrong key later. See linked-list/hard/LRUCacheDesign.java and design/hard/LFUCache.java.</div>
+        <div class="note info">Time/space: O(1) get/put for both, O(capacity) space. When to reach for this: "design a cache with eviction policy X" questions.</div>
       </div>
     </div>
 

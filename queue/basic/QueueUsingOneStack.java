@@ -1,7 +1,7 @@
 
 import java.util.Stack;
 
-public class  {
+public class QueueUsingOneStack {
 
     private Stack<Integer> stack = new Stack<>();
 

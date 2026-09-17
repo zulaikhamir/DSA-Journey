@@ -15,6 +15,48 @@ A strategic order to tackle topics, building from foundations to advanced concep
   `BinaryTreeToDLL` (medium) → `SerializeDeserialize`, iterative traversals (hard).
 - **Phase 6 DP — not started**: no `dp/` directory yet.
 
+## 🎯 Interview Prep Track (100-day plan, SDE1/backend Java @ ₹12 LPA+)
+
+Current LeetCode split is 73% Easy — from here, the focus shifts to Medium-difficulty
+coverage across all major interview patterns, not raw problem count. **Pace target: 8
+Medium problems/week.** New folders below are sequenced by tier (Tier 1 = highest
+interview frequency, do first).
+
+### Audit of existing folders (Medium-difficulty coverage)
+
+| Folder | Medium coverage | Flag |
+| --- | --- | --- |
+| `sorting/`, `hashing/`, `searching/`, `bit-manipulation/`, `matrix/` | Strong, all major sub-patterns present | OK |
+| `queue/`, `deque/`, `stack/` | Decent for topic scope | OK |
+| `arrays/medium/` | Only 2 files (RemoveDuplicates, SecondLargestEfficient) | **Thin** — missing prefix-sum/array-rearrangement mediums |
+| `linked-list/medium/` | Only 4 files, but `linked-list/hard/` picks up most classic mediums (cycle detection, merge, LRU) | Borderline OK |
+| `strings/medium/` | Only 1 file (LexicographicRank) | **Very thin** for a Tier-1-heavy topic |
+| `math/` | No `medium/`/`hard/` folder at all — Sieve/PrimeFactors live under `easy/`, mislabeled | **Thin / mislabeled** |
+| `sliding-window/` | Flat (no difficulty subfolders), only 5 files | **Thin**, inconsistent structure vs. rest of repo |
+| `trees/` | Only 2 files total (`BinaryTreeTraversal`, `BSTSearch`) | **Very thin** — missing Validate BST, LCA, Kth Smallest in BST, Level Order, Diameter, Serialize/Deserialize entirely |
+| `recursion/` | No `easy/` folder; decent basic+medium split | OK given backtracking is now split out separately |
+| `patterns/` | Easy-only | N/A — warm-up topic, Medium doesn't apply |
+
+None of the above were touched automatically — flagged here for a deliberate pass rather
+than silently added to.
+
+### New pattern folders (added, Tier-ordered)
+
+1. **`two-pointers/`** (Tier 1) — split out of arrays/searching for clarity: ContainerWithMostWater, ThreeSum, TrappingRainWater
+2. **`graphs/`** (Tier 1) — BFS/DFS, Union-Find, topological sort: NumberOfIslands, CloneGraph, RottingOranges, NumberOfConnectedComponents, CourseSchedule(+II), RedundantConnection, GraphValidTree, plus stretch NetworkDelayTime (Dijkstra) and PacificAtlanticWaterFlow
+3. **`dynamic-programming/`** (Tier 1) — 1D DP, classic patterns, 2D DP: ClimbingStairs, HouseRobber(+II), MaximumSubarrayKadane, DecodeWays, CoinChange, LongestIncreasingSubsequence, WordBreak, UniquePaths, LongestCommonSubsequence, EditDistance, ZeroOneKnapsack, PartitionEqualSubsetSum
+4. **`backtracking/`** (Tier 2) — Subsets(+II), Permutations, CombinationSum, WordSearch, PalindromePartitioning, LetterCombinationsPhoneNumber, plus stretch NQueens
+5. **`heap-priority-queue/`** (Tier 2) — KthLargestElement, TopKFrequentElements, TaskScheduler, plus stretch FindMedianFromDataStream and MergeKSortedLists
+6. **`intervals/`** (Tier 2) — MergeIntervals, InsertInterval, MeetingRoomsI(+II), NonOverlappingIntervals
+7. **`greedy/`** (Tier 2) — JumpGame(+II), GasStation
+8. **`design/`** (Tier 3) — MinStack, ImplementQueueUsingStacks, plus stretch LFUCache (LRUCache already existed at `linked-list/hard/LRUCacheDesign.java`)
+9. **`trie/`** (Tier 3, lowest priority) — ImplementTrie, WordSearchII
+
+All follow the existing `<topic>/<difficulty>/File.java` convention (standalone, default
+package, `public class` + `main`), verified to compile and run correctly.
+
+---
+
 ## 📚 Phase 1: Foundations (Weeks 1-2)
 **Goal**: Build core programming skills and problem-solving mindset
 
