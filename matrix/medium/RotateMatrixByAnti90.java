@@ -1,5 +1,14 @@
-
-public class RotateMatrixBy90 {//90 degree clockwise
+// This program rotates a given matrix by 90 degrees anticlockwise. The rotation is achieved by creating a new matrix and filling it with the rotated values from the original matrix.
+// The rotation is achieved by creating a new matrix and filling it with the rotated values from the original matrix.
+// For example, if the matrix is:
+// 1 2 3 4
+// 5 6 7 8
+// 9 10 11 12
+// After 90° clockwise rotation:
+// 9 5 1
+// 10 6 2
+// 11 7 3
+public class RotateMatrixByAnti90 {//90 degree anticlockwise
 
     public static void main(String[] args) {
         int[][] mat = {

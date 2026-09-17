@@ -1,4 +1,12 @@
-
+// This program performs a spiral order traversal of a given 2D matrix. 
+// The traversal starts from the top-left corner of the matrix and proceeds in a clockwise spiral pattern,
+//  visiting each element exactly once. The result is returned as a 1D array containing the elements
+//  in the order they were visited.
+// For example, if the matrix is:
+// 1 2 3 4
+// 5 6 7 8
+// 9 10 11 12
+// The output will be: 1 2 3 4 8 12 11 10 9 5 6 7
 public class SpiralOrderTraversal {
 
     public static int[] spiralOrder(int[][] matrix) {

@@ -1,4 +1,11 @@
-
+// This program prints the boundary elements of a matrix in a clockwise manner.
+//  The boundary elements are the elements that are on the outermost edges of the matrix. 
+// The program handles special cases where the matrix has only one row or one column.
+//example 
+// 1 2 3 4
+// 5 6 7 8
+// 9 10 11 12
+// The output will be 1 2 3 4 8 12 11 10 9 5
 public class BoundaryElements {
 
     public static void main(String[] args) {
@@ -6,11 +13,11 @@ public class BoundaryElements {
         int r = mat.length;
         int c = mat[0].length;
 
-        if (r == 1) {
+        if (r == 1) {// If there is only one row, print all elements in that row
             for (int i = 0; i < c; i++) {
                 System.out.println(mat[0][i]);
             }
-        } else if (c == 1) {
+        } else if (c == 1) {// If there is only one column, print all elements in that column
             for (int i = 0; i < r; i++) {
                 System.out.println(mat[i][0]);
             }
