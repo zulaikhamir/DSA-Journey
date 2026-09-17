@@ -2,6 +2,19 @@
 
 A strategic order to tackle topics, building from foundations to advanced concepts.
 
+## ✅ Current status (based on git history)
+
+- **Phases 1–4 complete**: Patterns, Math, Arrays, Strings, Linked List, Stack, Queue,
+  Deque, Sorting (incl. heap/counting/radix/bucket/cycle sort), Searching, Recursion,
+  Hashing, Bit Manipulation.
+- **Phase 5.1–5.3 complete**: Matrix, advanced Math (Sieve, prime factors, Josephus),
+  advanced Stack/Queue/Deque/Linked List.
+- **Phase 5.4 Trees — in progress, pick up here next**: only
+  `trees/basic/BinaryTreeTraversal.java` and `trees/easy/BSTSearch.java` exist so far.
+  Next up: `HeightOfTree`, `SizeOfTree` (easy) → `LevelOrderTraversal`, `LeftView`,
+  `BinaryTreeToDLL` (medium) → `SerializeDeserialize`, iterative traversals (hard).
+- **Phase 6 DP — not started**: no `dp/` directory yet.
+
 ## 📚 Phase 1: Foundations (Weeks 1-2)
 **Goal**: Build core programming skills and problem-solving mindset
 
